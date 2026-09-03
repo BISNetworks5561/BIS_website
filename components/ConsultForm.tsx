@@ -1,7 +1,8 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from "react";
-import { submitConsult, initialConsultState } from "@/app/actions/consult";
+import { submitConsult } from "@/app/actions/consult";
+import { initialConsultState } from "@/lib/consult";
 import { consult } from "@/lib/content";
 import { cn } from "@/lib/utils";
 

@@ -3,13 +3,7 @@
 import { headers } from "next/headers";
 import { getServiceClient } from "@/lib/supabase/server";
 
-export type ConsultState = {
-  ok: boolean | null;
-  message: string;
-  errors?: Partial<Record<string, string>>;
-};
-
-export const initialConsultState: ConsultState = { ok: null, message: "" };
+import type { ConsultState } from "@/lib/consult";
 
 const PLAN_TYPES = new Set(["standalone", "bundle", "unknown"]);
 const IP_TYPES = new Set(["dynamic", "static", "unknown"]);
