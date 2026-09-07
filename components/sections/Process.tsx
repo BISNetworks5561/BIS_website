@@ -21,11 +21,11 @@ export default function Process() {
           </li>
         ))}
       </ol>
-      <div className="mt-10 flex flex-col items-center justify-center gap-3 rounded-3xl bg-brand p-6 text-white md:flex-row md:gap-6 md:p-8">
+      <div className="mt-10 flex flex-col items-center justify-center gap-3 rounded-3xl bg-brand-gradient p-6 text-white md:flex-row md:gap-6 md:p-8">
         <p className="text-center text-lg font-black md:text-xl">지금 전화하시면 당일 견적을 받아보실 수 있습니다.</p>
         <a
           href={telHref(siteConfig.contact.phone)}
-          className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-lg font-black text-brand"
+          className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-lg font-black text-brand-dark"
         >
           <Icon name="phone" className="h-5 w-5" /> {siteConfig.contact.phoneDisplay}
         </a>

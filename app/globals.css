@@ -1,18 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #e6007e;
-  --color-brand-dark: #b8005f;
-  --color-brand-light: #fde7f3;
-  --color-accent: #ff3b30;
-  --color-ink: #111111;
-  --color-muted: #6b7280;
-  --color-line: #e5e7eb;
-  --color-surface: #f8f8fa;
+  /* BIS Networks 브랜드 (로고 그라데이션: 시안 → 네이비) */
+  --color-brand: #1160b8;
+  --color-brand-dark: #0b2a6b;
+  --color-brand-light: #e8f2fc;
+  --color-brand-cyan: #25aeee;
+
+  /* LG U+ 포인트 컬러 — U+ 상품 표기·인기 뱃지 등 제한적으로 사용 */
+  --color-uplus: #e6007e;
+  --color-uplus-dark: #b8005f;
+  --color-uplus-light: #fde7f3;
+
+  --color-accent: #e53935; /* 오류·경고 */
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
+  --color-line: #e2e8f0;
+  --color-surface: #f4f7fb;
 
   --font-sans: var(--font-noto), "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
 
-  --shadow-card: 0 1px 2px rgba(17, 17, 17, 0.04), 0 8px 24px -12px rgba(17, 17, 17, 0.12);
+  --shadow-card: 0 1px 2px rgba(11, 42, 107, 0.05), 0 10px 28px -14px rgba(11, 42, 107, 0.22);
 }
 
 html {
@@ -25,6 +33,17 @@ body {
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
+}
+
+/* 로고 그라데이션 유틸리티 */
+.bg-brand-gradient {
+  background: linear-gradient(135deg, #25aeee 0%, #1160b8 55%, #0b2a6b 100%);
+}
+.text-brand-gradient {
+  background: linear-gradient(120deg, #25aeee 0%, #1160b8 60%, #0b2a6b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @keyframes fade-up {

@@ -163,7 +163,7 @@ export const trust = {
   title: "믿고 맡기셔도 됩니다",
   subtitle: "신뢰 지표 · 수상",
   points: [
-    `SINCE ${siteConfig.company.since} · LG U+ 기업통신 서비스 전문`,
+    "LG U+ 오피스넷 공식 판매센터 · 기업통신 전문 상담",
     "최적의 네트워크 환경 및 통신 요금 설계",
     "네트워크 통신 장비 재고 보유 · 즉시 대응",
     "설치부터 사후지원까지 한 번에",

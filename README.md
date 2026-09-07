@@ -62,3 +62,21 @@ components/
   sections/*.tsx        # 각 섹션
 supabase/migrations/    # consult_requests 테이블 SQL
 ```
+
+## 5. 도메인 연결 (bisnetworks.co.kr, 카페24 → Vercel)
+
+1. Vercel 프로젝트 → **Settings → Domains** 에 `bisnetworks.co.kr` 과 `www.bisnetworks.co.kr` 추가
+2. 카페24 **도메인 관리 → DNS 관리** 에서 아래 레코드 설정 (기존 카페24 호스팅용 A/CNAME 레코드는 삭제)
+
+| 타입 | 호스트 | 값 |
+| --- | --- | --- |
+| A | @ | `76.76.21.21` |
+| CNAME | www | `cname.vercel-dns.com` |
+
+3. 전파(수 분~수 시간) 후 Vercel Domains 화면에서 Valid Configuration 확인
+4. Vercel 환경변수 `NEXT_PUBLIC_SITE_URL=https://bisnetworks.co.kr` 로 설정 후 재배포
+
+## 로고 교체
+
+현재 `public/logo-mark.svg`(육각 마크), `public/logo.svg`(가로형 풀 로고)는 원본 로고를 참고해 만든 SVG 근사본입니다.
+원본 파일이 있으면 같은 파일명으로 덮어쓰거나, `site.config.ts` 의 `brand.logoSrc` / `brand.logoFullSrc` 경로를 바꿔 주세요.

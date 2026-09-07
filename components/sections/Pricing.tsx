@@ -25,7 +25,7 @@ export default function Pricing() {
             onClick={() => setTab(t.key)}
             className={cn(
               "rounded-full px-5 py-2.5 text-sm font-bold transition-colors md:px-7",
-              tab === t.key ? "bg-brand text-white" : "text-muted hover:text-ink",
+              tab === t.key ? "bg-brand-gradient text-white" : "text-muted hover:text-ink",
             )}
           >
             {t.label}
@@ -54,13 +54,13 @@ export default function Pricing() {
             {rows.map((r) => (
               <tr
                 key={r.speed}
-                className={cn("border-b border-line last:border-0", r.popular && "bg-brand-light/40")}
+                className={cn("border-b border-line last:border-0", r.popular && "shadow-[inset_3px_0_0_0_var(--color-uplus)]")}
               >
                 <th scope="row" className="px-5 py-5 md:px-8">
                   <div className="flex items-center gap-2">
                     <span className="text-xl font-black">{r.speed}</span>
                     {r.popular && (
-                      <span className="rounded-full bg-brand px-2 py-0.5 text-[11px] font-bold text-white">
+                      <span className="rounded-full bg-uplus px-2 py-0.5 text-[11px] font-bold text-white">
                         {"badge" in r && r.badge ? r.badge : "인기"}
                       </span>
                     )}

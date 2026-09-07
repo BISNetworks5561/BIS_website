@@ -8,16 +8,23 @@ export default function Consult() {
   return (
     <Section id="consult" eyebrow={consult.subtitle} title={consult.title} desc={consult.desc}>
       <div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr]">
-        <aside className="rounded-3xl bg-ink p-6 text-white md:p-8">
-          <p className="text-sm font-bold text-brand-light">전화가 더 빠릅니다</p>
+        <aside className="rounded-3xl bg-brand-gradient p-6 text-white md:p-8">
+          <p className="text-sm font-bold text-white/80">전화가 더 빠릅니다</p>
           <a href={telHref(siteConfig.contact.phone)} className="mt-2 block text-3xl font-black md:text-4xl">
             {siteConfig.contact.phoneDisplay}
           </a>
           <p className="mt-2 text-sm text-white/70">{siteConfig.contact.hours}</p>
+          <a
+            href={telHref(siteConfig.contact.manager.phone)}
+            className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/25 px-4 py-2 text-sm font-bold hover:bg-white/10"
+          >
+            <Icon name="phone" className="h-4 w-4 text-brand-cyan" />
+            {siteConfig.contact.manager.name} 직통 {siteConfig.contact.manager.phone}
+          </a>
           <ul className="mt-6 space-y-2 text-sm text-white/85">
             {["당일 맞춤 견적 제안", "가입비·설치비 0원", "설치 후 장애·이전·변경 전담 관리"].map((t) => (
               <li key={t} className="flex items-center gap-2">
-                <Icon name="check" className="h-4 w-4 text-brand" strokeWidth={2.5} />
+                <Icon name="check" className="h-4 w-4 text-brand-cyan" strokeWidth={2.5} />
                 {t}
               </li>
             ))}

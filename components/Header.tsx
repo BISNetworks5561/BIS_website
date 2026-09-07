@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Icon from "@/components/ui/Icon";
+import Logo from "@/components/Logo";
+import UplusBadge from "@/components/ui/UplusBadge";
 import { nav } from "@/lib/content";
 import { siteConfig, telHref } from "@/site.config";
 import { cn } from "@/lib/utils";
@@ -34,17 +35,15 @@ export default function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-20 md:px-8">
-        <Link href="/" className="flex items-center gap-2.5" aria-label={siteConfig.brand.name + " 홈"}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-sm font-black tracking-tight text-white">
-            {siteConfig.brand.logoText}
+        <div className="flex items-center gap-3">
+          <Logo />
+          <span className="hidden items-center gap-3 xl:flex">
+            <span className="h-6 w-px bg-line" />
+            <UplusBadge>{siteConfig.brand.tagline}</UplusBadge>
           </span>
-          <span className="leading-tight">
-            <span className="block text-base font-black">{siteConfig.brand.name}</span>
-            <span className="block text-[11px] font-medium text-muted">{siteConfig.brand.tagline}</span>
-          </span>
-        </Link>
+        </div>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="주요 메뉴">
+        <nav className="hidden items-center gap-6 lg:flex" aria-label="주요 메뉴">
           {nav.map((n) => (
             <a key={n.href} href={n.href} className="text-sm font-medium text-ink/80 hover:text-brand">
               {n.label}
@@ -55,16 +54,16 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <a
             href={telHref(siteConfig.contact.phone)}
-            className="hidden items-center gap-2 rounded-full bg-brand px-4 py-2.5 text-white transition-colors hover:bg-brand-dark md:flex"
+            className="hidden shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-brand-gradient px-4 py-2.5 text-white shadow-[0_8px_20px_-8px_rgba(17,96,184,0.6)] transition-all hover:brightness-110 md:flex"
           >
             <Icon name="phone" className="h-4 w-4" />
             <span className="text-[11px] font-medium leading-none opacity-90">대표전화</span>
-            <span className="text-lg font-black leading-none tracking-tight">{siteConfig.contact.phoneDisplay}</span>
+            <span className="whitespace-nowrap text-lg font-black leading-none tracking-tight">{siteConfig.contact.phoneDisplay}</span>
           </a>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-surface lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-brand-dark hover:bg-surface lg:hidden"
             aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
             aria-expanded={open}
           >
@@ -75,6 +74,9 @@ export default function Header() {
 
       {open && (
         <div className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-line bg-white px-5 py-4 lg:hidden">
+          <p className="pb-2">
+            <UplusBadge>{siteConfig.brand.tagline}</UplusBadge>
+          </p>
           <nav className="flex flex-col" aria-label="모바일 메뉴">
             {nav.map((n) => (
               <a
@@ -89,7 +91,7 @@ export default function Header() {
           </nav>
           <a
             href={telHref(siteConfig.contact.phone)}
-            className="mt-6 flex items-center justify-center gap-2 rounded-full bg-brand py-4 text-lg font-black text-white"
+            className="mt-6 flex items-center justify-center gap-2 rounded-full bg-brand-gradient py-4 text-lg font-black text-white"
           >
             <Icon name="phone" className="h-5 w-5" /> {siteConfig.contact.phoneDisplay}
           </a>

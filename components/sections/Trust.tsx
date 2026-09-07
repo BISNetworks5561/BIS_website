@@ -28,10 +28,10 @@ export default function Trust() {
           ))}
         </ul>
         <ul className="space-y-3 rounded-3xl border border-line p-6 md:p-8">
-          <li className="mb-2 text-sm font-bold text-brand">수상 · 인증</li>
+          <li className="mb-2 text-sm font-bold text-uplus">수상 · 인증</li>
           {siteConfig.awards.map((a) => (
             <li key={a} className="flex items-start gap-3 text-sm font-medium md:text-base">
-              <Icon name="award" className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+              <Icon name="award" className="mt-0.5 h-5 w-5 shrink-0 text-uplus" />
               {a}
             </li>
           ))}

@@ -14,21 +14,27 @@ export const siteConfig = {
   /** 브랜드 */
   brand: {
     name: "BIS네트웍스",
-    nameEn: "BIS Networks",
+    nameEn: "BISNETWORKS",
+    /** 로고 아래 도메인 표기 */
+    domainLabel: "bisnetworks.co.kr",
     /** 헤더/히어로에 노출되는 부제 */
     tagline: "LG U+ 오피스넷 공식 판매센터",
     /** 로고 이미지가 없을 때 사용하는 텍스트 로고 */
     logoText: "BIS",
     /** public/ 아래 로고 파일 경로 (없으면 텍스트 로고 사용) */
-    logoSrc: "/logo.svg",
+    logoSrc: "/logo-mark.svg",
+    /** 가로형 풀 로고 (푸터용) */
+    logoFullSrc: "/logo.svg",
   },
 
   /** 연락처 */
   contact: {
-    /** TODO 대표전화 (tel: 링크용, 숫자와 하이픈만) */
-    phone: "0000-0000",
+    /** 대표전화 (tel: 링크용) — 기존 bisnetworks.co.kr 사이트 기준 */
+    phone: "02-6956-9999",
     /** 화면 표시용 */
-    phoneDisplay: "0000-0000",
+    phoneDisplay: "02-6956-9999",
+    /** 담당 프로 직통 */
+    manager: { name: "한진우 프로", phone: "010-5856-5561" },
     /** TODO 장애 접수 전화 (LG U+ 기업 장애센터) */
     faultPhone: "1544-0000",
     /** TODO 이메일 */
@@ -41,25 +47,23 @@ export const siteConfig = {
 
   /** 사업자 정보 (푸터) */
   company: {
-    /** TODO 상호 */
-    legalName: "주식회사 비아이에스네트웍스",
-    /** TODO 대표자 */
-    ceo: "홍길동",
-    /** TODO 사업자등록번호 */
-    bizNumber: "000-00-00000",
-    /** TODO 통신판매업 신고번호 */
-    telecomSalesNumber: "제 0000-서울○○-0000 호",
-    /** TODO 사업장 주소 */
-    address: "서울특별시 ○○구 ○○로 00, 0층 (우 00000)",
-    /** TODO 개인정보보호 책임자 */
-    privacyOfficer: "홍길동",
-    /** 설립연도 (신뢰 지표 "SINCE" 표기용) */
-    since: 2014,
+    /** 상호 (사업자등록증 기준) */
+    legalName: "비아이에스네트웍스",
+    /** 대표자 (사업자등록증 기준) */
+    ceo: "한진우",
+    /** 사업자등록번호 (사업자등록증 기준) */
+    bizNumber: "476-01-04248",
+    /** 사업장 주소 */
+    address: "서울시 강남구 헌릉로569길 21-30, 109호",
+    /** 개인정보보호 책임자 */
+    privacyOfficer: "한진우",
+    /** 개업연도 (사업자등록증 기준) */
+    since: 2026,
   },
 
   /** 사이트 메타 */
   site: {
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bis-website.vercel.app",
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bisnetworks.co.kr",
     title: "BIS네트웍스 | LG U+ 오피스넷 기업인터넷 판매센터",
     description:
       "PC 대수 무제한, 고정IP, 광케이블 최대 10Gbps. LG U+ 오피스넷 기업인터넷 가입비·설치비 0원, 월 요금 맞춤 설계. 전화 한 통으로 당일 견적.",
@@ -103,11 +107,40 @@ export const siteConfig = {
     maxStaticIp: 20,
   },
 
+  /**
+   * 추천 결합 패키지 (기존 bisnetworks.co.kr 게시 가격, 3년 약정·부가세 포함 기준)
+   * price 가 null 이면 "상담 문의"로 표시됩니다.
+   */
+  bundlePackages: [
+    {
+      name: "인터넷 1G + AI 전화 + CCTV",
+      items: ["오피스넷 1G", "U+ AI 전화", "CCTV 에스원 안심 1대"],
+      regularPrice: 133100,
+      price: 48400,
+      popular: true,
+    },
+    {
+      name: "인터넷 100M + AI 전화",
+      items: ["오피스넷 100M", "U+ AI 전화"],
+      regularPrice: 56100,
+      price: 28300,
+      popular: false,
+    },
+    {
+      name: "인터넷 1G + AI 전화 + CCTV + IPTV",
+      items: ["오피스넷 1G", "U+ AI 전화", "CCTV", "IPTV 프리미엄"],
+      regularPrice: 155100,
+      price: 68200,
+      popular: false,
+    },
+  ],
+  bundlePackagesNote: "3년 약정 · 부가세 포함 월 요금. 정상가 대비 결합 할인 적용 금액이며 프로모션에 따라 달라질 수 있습니다.",
+
   /** 신뢰 지표 (TODO 실제 수치로 교체) */
   stats: [
     { value: 18800, suffix: "+", label: "누적 기업 고객" },
     { value: 83800, suffix: "회", label: "전문 컨설팅" },
-    { value: 12, suffix: "년", label: "LG U+ 기업통신 전문" },
+    { value: 5, suffix: "일", label: "평균 개통 소요 (영업일)" },
     { value: 24, suffix: "시간", label: "기업 전담 장애센터" },
   ],
 

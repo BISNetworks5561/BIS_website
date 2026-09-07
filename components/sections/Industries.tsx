@@ -14,7 +14,7 @@ export default function Industries() {
             <Icon name={it.icon as IconName} className="h-8 w-8 text-ink group-hover:text-brand" />
             <h3 className="mt-4 text-lg font-black">{it.name}</h3>
             <p className="mt-1 text-sm text-muted">{it.desc}</p>
-            <p className="mt-4 inline-block rounded-full bg-ink px-3 py-1 text-xs font-bold text-white group-hover:bg-brand">
+            <p className="mt-4 inline-block rounded-full bg-brand-dark px-3 py-1 text-xs font-bold text-white group-hover:bg-brand">
               추천 {it.rec}
             </p>
           </li>

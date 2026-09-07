@@ -1,6 +1,7 @@
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import { hero } from "@/lib/content";
+import UplusBadge from "@/components/ui/UplusBadge";
 import { siteConfig, telHref } from "@/site.config";
 
 export default function Hero() {
@@ -12,14 +13,11 @@ export default function Hero() {
       />
       <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-8 md:py-28">
         <div className="animate-fade-up">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand-light px-3 py-1 text-xs font-bold text-brand">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-            {hero.eyebrow}
-          </p>
+          <p className="mb-4"><UplusBadge>{hero.eyebrow}</UplusBadge></p>
           <h1 className="text-3xl font-black leading-[1.2] tracking-tight md:text-5xl md:leading-[1.15]">
             {hero.title[0]}
             <br />
-            <span className="text-brand">{hero.title[1]}</span>
+            <span className="text-brand-gradient">{hero.title[1]}</span>
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted md:text-lg">{hero.subtitle}</p>
 
@@ -39,7 +37,7 @@ export default function Hero() {
             </Button>
             <a
               href={telHref(siteConfig.contact.phone)}
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-full border-2 border-ink px-8 text-base font-bold hover:bg-ink hover:text-white"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-full border-2 border-brand-dark px-8 text-base font-bold text-brand-dark hover:bg-brand-dark hover:text-white"
             >
               <Icon name="phone" className="h-5 w-5" />
               {hero.secondaryCta} {siteConfig.contact.phoneDisplay}
@@ -50,7 +48,7 @@ export default function Hero() {
 
         <div className="animate-fade-up [animation-delay:120ms]">
           <div className="rounded-3xl border border-line bg-white p-6 shadow-card md:p-8">
-            <p className="text-sm font-bold text-brand">LG U+ 오피스넷</p>
+            <UplusBadge />
             <p className="mt-1 text-2xl font-black">기업 전용 광케이블 인터넷</p>
             <dl className="mt-6 grid grid-cols-2 gap-4">
               {[
@@ -65,7 +63,7 @@ export default function Hero() {
                 </div>
               ))}
             </dl>
-            <div className="mt-6 flex items-center justify-between rounded-2xl bg-ink p-4 text-white">
+            <div className="mt-6 flex items-center justify-between rounded-2xl bg-brand-gradient p-4 text-white">
               <div>
                 <p className="text-xs opacity-80">월 요금</p>
                 <p className="text-2xl font-black">
@@ -73,7 +71,7 @@ export default function Hero() {
                   <span className="text-sm font-medium opacity-80">부터</span>
                 </p>
               </div>
-              <span className="rounded-full bg-brand px-3 py-1 text-xs font-bold">가입비·설치비 0원</span>
+              <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold ring-1 ring-white/30">가입비·설치비 0원</span>
             </div>
           </div>
         </div>

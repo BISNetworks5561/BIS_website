@@ -8,7 +8,7 @@ export default function Concerns() {
       <ul className="grid gap-5 md:grid-cols-2">
         {concerns.items.map((c, i) => (
           <li key={c.q} className="flex gap-4 rounded-3xl bg-white p-6 shadow-card">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-black text-white">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-dark text-sm font-black text-white">
               {String(i + 1).padStart(2, "0")}
             </span>
             <div>
