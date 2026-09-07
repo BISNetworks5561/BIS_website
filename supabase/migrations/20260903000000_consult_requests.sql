@@ -44,3 +44,13 @@ create index if not exists consult_requests_status_idx
 alter table public.consult_requests enable row level security;
 
 revoke all on public.consult_requests from anon, authenticated;
+
+-- 공개(anon/publishable) 키로는 INSERT 만 허용, SELECT/UPDATE/DELETE 불가.
+-- (서버에 secret 키가 없을 때 폼 제출 fallback 용)
+grant insert on public.consult_requests to anon;
+drop policy if exists "anon can insert consult requests" on public.consult_requests;
+create policy "anon can insert consult requests"
+  on public.consult_requests
+  for insert
+  to anon
+  with check (agree_privacy = true and status = 'new');
