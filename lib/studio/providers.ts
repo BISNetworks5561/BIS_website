@@ -208,8 +208,14 @@ async function withGemini(input: StudioRequest, model: string): Promise<Generate
   return callGemini(input, model, key, true);
 }
 
-async function callGemini(input: StudioRequest, model: string, key: string, allowFallback: boolean): Promise<GenerateResult> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+async function callGemini(
+  input: StudioRequest,
+  model: string,
+  key: string,
+  allowFallback: boolean,
+  apiVersion: "v1beta" | "v1" = "v1beta",
+): Promise<GenerateResult> {
+  const url = `https://generativelanguage.googleapis.com/${apiVersion}/models/${encodeURIComponent(model)}:generateContent`;
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-goog-api-key": key },
@@ -228,13 +234,18 @@ async function callGemini(input: StudioRequest, model: string, key: string, allo
     } catch {
       detail = body.slice(0, 200);
     }
-    if (res.status === 404 && allowFallback) {
-      // 모델 이름이 계정에 없음 → 사용 가능한 모델로 자동 대체
-      const available = await listGeminiModels(key);
-      const alt = pickGeminiModel(model, available);
-      if (alt && alt !== model) return callGemini(input, alt, key, false);
+    if (res.status === 404) {
+      console.warn(`[studio] gemini 404 (${apiVersion}, ${model}): ${detail}`);
+      // 1) 같은 모델을 v1 주소로 재시도 (키 종류에 따라 v1beta 가 막힌 경우)
+      if (apiVersion === "v1beta") return callGemini(input, model, key, allowFallback, "v1");
+      // 2) 계정에서 사용 가능한 다른 모델로 대체
+      if (allowFallback) {
+        const available = await listGeminiModels(key);
+        const alt = pickGeminiModel(model, available);
+        if (alt && alt !== model) return callGemini(input, alt, key, false);
+      }
       throw new ProviderError(
-        `Gemini 모델 "${model}" 을(를) 이 키로 사용할 수 없습니다. 사용 가능: ${available.slice(0, 8).join(", ") || "(목록 조회 실패)"}`,
+        `Gemini 모델 "${model}" 호출이 404로 거부되었습니다. 구글 응답: ${detail || "(상세 없음)"} — API 키가 AI Studio(aistudio.google.com)에서 만든 키인지, Google Cloud 콘솔에서 'Generative Language API' 가 사용 설정되어 있는지 확인하세요.`,
         502,
       );
     }

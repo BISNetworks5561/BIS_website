@@ -106,4 +106,4 @@ supabase/migrations/    # consult_requests 테이블 SQL
 | Gemini | `GEMINI_API_KEY` (선택 `GEMINI_MODEL`) | 기본 `gemini-2.5-flash`, aistudio.google.com 발급 |
 | Ollama | `OLLAMA_BASE_URL`, `OLLAMA_MODEL` (선택 `OLLAMA_API_KEY`) | 로컬 `http://localhost:11434` 는 개발 서버에서만 동작. Vercel에서 쓰려면 외부 접근 가능한 Ollama 서버 또는 ollama.com 클라우드 필요 |
 
-배경 이미지는 `public/studio/thumb-bg-*.png` 프리셋 또는 브라우저에서 올린 내 이미지를 씁니다(브라우저에만 저장).
+**대표이미지 배경**: 기본 5종(`public/studio/bg-*.png`) + 직접 올린 이미지. 카테고리(공통/오피스넷/소호인터넷/인터넷전화/CCTV)별로 등록하고 ★로 기본 배경을 지정하면 글의 상품에 맞는 배경이 자동 선택됩니다. 업로드 이미지는 Supabase Storage `studio` 버킷(자동 생성)에 저장되어 팀 공용으로 보이며, `SUPABASE_SECRET_KEY`·`admin_settings` 테이블이 없으면 브라우저에만 저장됩니다. 모서리 라운드(투명 PNG)도 지원합니다.

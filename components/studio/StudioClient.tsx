@@ -5,6 +5,7 @@ import { useAdminKey } from "@/components/admin/admin-key-context";
 import ThumbnailMaker from "@/components/studio/ThumbnailMaker";
 import type { BlogPost, StudioRequest } from "@/lib/studio/schema";
 import { postToHtml, postToText } from "@/lib/studio/render";
+import { productToCategory } from "@/lib/studio/backgrounds";
 import { cn } from "@/lib/utils";
 
 type ProviderKey = "claude" | "gemini" | "ollama";
@@ -295,6 +296,7 @@ export default function StudioClient() {
               title={thumb.title || "대표 문구를 입력하세요"}
               subtitle={thumb.subtitle}
               badge={thumb.badge}
+              category={productToCategory(req.product)}
               onChange={(v) => setThumb((t) => ({ ...t, ...v }))}
             />
           )}
