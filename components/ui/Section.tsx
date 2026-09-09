@@ -15,9 +15,9 @@ export default function Section({ id, eyebrow, title, desc, className, tone = "w
     <section
       id={id}
       className={cn(
-        "scroll-mt-20 py-16 md:py-24",
-        tone === "surface" && "bg-surface",
-        tone === "brand" && "bg-brand text-white",
+        "scroll-mt-24 py-16 md:py-24",
+        tone === "surface" && "bg-surface lg:rounded-3xl",
+        tone === "brand" && "bg-brand text-white lg:rounded-3xl",
         className,
       )}
     >

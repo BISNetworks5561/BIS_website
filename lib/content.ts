@@ -5,8 +5,9 @@ import { siteConfig } from "@/site.config";
 
 export const nav = [
   { label: "특장점", href: "#features" },
-  { label: "요금안내", href: "#pricing" },
   { label: "가입혜택", href: "#benefits" },
+  { label: "구성도", href: "#diagram" },
+  { label: "요금안내", href: "#pricing" },
   { label: "개통절차", href: "#process" },
   { label: "고객후기", href: "#reviews" },
   { label: "FAQ", href: "#faq" },
@@ -103,6 +104,23 @@ export const industries = {
       rec: "100M~500M + CCTV 결합",
     },
   ],
+};
+
+export const diagram = {
+  title: "사무실까지 전용 광케이블로 직접 연결됩니다",
+  subtitle: "서비스 구성도",
+  desc: "LG U+ 기업 백본망에서 사무실 장비까지 1:1 전용 구성. PC·서버·CCTV·전화가 한 회선으로 안정적으로 연결됩니다.",
+  backbone: { title: "LG U+ 기업 백본망", desc: "전국 광 네트워크 · 사전 감시 시스템" },
+  line: { title: "광케이블 전용회선", desc: "최대 10Gbps 대칭 속도 · 고객 건물까지 1:1 구성" },
+  office: { title: "사무실 장비", desc: "L2 스위치 · 기가 와이파이 공유기 (무상 지원)" },
+  devices: [
+    { icon: "monitor", name: "업무용 PC", desc: "대수 무제한" },
+    { icon: "server", name: "사내 서버 · NAS", desc: "고정IP 최대 20개" },
+    { icon: "camera", name: "CCTV · 관제", desc: "원격 접속 안정" },
+    { icon: "phone", name: "인터넷전화", desc: "결합 시 할인" },
+    { icon: "wifi", name: "노트북 · 모바일", desc: "기가 Wi-Fi" },
+  ],
+  support: "365일 24시간 기업 전담 장애센터가 회선 상태를 상시 모니터링합니다.",
 };
 
 export const pricing = {

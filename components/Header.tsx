@@ -30,11 +30,11 @@ export default function Header() {
     <header
       id="top"
       className={cn(
-        "sticky top-0 z-40 w-full border-b bg-white/95 backdrop-blur transition-shadow",
+        "sticky top-0 z-40 w-full border-b bg-white transition-shadow",
         scrolled ? "border-line shadow-sm" : "border-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-20 md:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-20 md:px-8">
         <div className="flex items-center gap-3">
           <Logo />
           <span className="hidden items-center gap-3 xl:flex">
@@ -42,14 +42,6 @@ export default function Header() {
             <UplusBadge>{siteConfig.brand.tagline}</UplusBadge>
           </span>
         </div>
-
-        <nav className="hidden items-center gap-6 lg:flex" aria-label="주요 메뉴">
-          {nav.map((n) => (
-            <a key={n.href} href={n.href} className="text-sm font-medium text-ink/80 hover:text-brand">
-              {n.label}
-            </a>
-          ))}
-        </nav>
 
         <div className="flex items-center gap-2">
           <a
@@ -73,7 +65,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-line bg-white px-5 py-4 lg:hidden">
+        <div className="fixed inset-x-0 top-16 bottom-0 z-50 overflow-y-auto border-t border-line bg-white px-5 py-4 lg:hidden">
           <p className="pb-2">
             <UplusBadge>{siteConfig.brand.tagline}</UplusBadge>
           </p>
