@@ -80,14 +80,37 @@ export default function Pricing() {
         </table>
       </div>
 
-      <ul className="mt-5 space-y-1 text-xs text-muted md:text-sm">
-        {tab === "bundle" && <li>· {siteConfig.pricing.bundleNote}</li>}
-        <li>
-          · 고정IP 추가 시 개당 {krw(siteConfig.pricing.extraStaticIp)}/월, 최대 {siteConfig.pricing.maxStaticIp}개까지
-          가능합니다.
-        </li>
-        <li>· 표시 요금은 예시이며 건물 환경·지역·프로모션에 따라 달라질 수 있습니다. 정확한 견적은 상담을 통해 안내드립니다.</li>
-      </ul>
+      {/* 요금표 하단 안내사항 */}
+      <div className="mt-6 space-y-3 text-sm text-ink/80">
+        {tab === "bundle" && (
+          <p className="flex gap-2">
+            <span className="text-muted">·</span>
+            {siteConfig.pricing.bundleNote}
+          </p>
+        )}
+        <p className="flex gap-2">
+          <span className="text-muted">·</span>
+          {pricing.notes.staticIp}
+        </p>
+        <div className="ml-4 rounded-2xl bg-white p-5 shadow-card">
+          <p className="flex items-center gap-2 font-bold text-brand-dark">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+            {pricing.notes.staticIpWhenTitle}
+          </p>
+          <ul className="mt-2 space-y-1.5 text-muted">
+            {pricing.notes.staticIpWhen.map((t) => (
+              <li key={t} className="flex gap-2">
+                <span>-</span>
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="flex gap-2">
+          <span className="text-muted">·</span>
+          {pricing.notes.relocation}
+        </p>
+      </div>
 
       <div className="mt-8 text-center">
         <Button href="#consult" size="lg">
