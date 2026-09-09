@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Icon from "@/components/ui/Icon";
 import Logo from "@/components/Logo";
+import ProductNav from "@/components/ProductNav";
 import UplusBadge from "@/components/ui/UplusBadge";
 import { nav } from "@/lib/content";
 import { siteConfig, telHref } from "@/site.config";
@@ -35,12 +36,9 @@ export default function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-20 md:px-8">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4 lg:gap-8">
           <Logo />
-          <span className="hidden items-center gap-3 xl:flex">
-            <span className="h-6 w-px bg-line" />
-            <UplusBadge>{siteConfig.brand.tagline}</UplusBadge>
-          </span>
+          <ProductNav />
         </div>
 
         <div className="flex items-center gap-2">
@@ -66,9 +64,11 @@ export default function Header() {
 
       {open && (
         <div className="fixed inset-x-0 top-16 bottom-0 z-50 overflow-y-auto border-t border-line bg-white px-5 py-4 md:hidden">
-          <p className="pb-2">
+          <p className="pb-3">
             <UplusBadge>{siteConfig.brand.tagline}</UplusBadge>
           </p>
+          <ProductNav variant="mobile" />
+          <p className="mt-5 mb-1 text-xs font-bold text-muted">오피스넷 바로가기</p>
           <nav className="flex flex-col" aria-label="모바일 메뉴">
             {nav.map((n) => (
               <a

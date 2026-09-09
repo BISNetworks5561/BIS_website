@@ -3,6 +3,36 @@
  */
 import { siteConfig } from "@/site.config";
 
+/** 상단 가로형 상품 메뉴 */
+export const productNav = [
+  { label: "오피스넷", href: "/", desc: "기업 전용 광케이블 인터넷" },
+  { label: "소호인터넷", href: "/soho", desc: "소상공인·매장용 인터넷" },
+  { label: "전화", href: "/phone", desc: "기업 인터넷전화 · AI 전화" },
+  { label: "CCTV", href: "/cctv", desc: "지능형 CCTV · 클라우드 관제" },
+];
+
+/** 준비 중 상품 페이지 카피 */
+export const productPages = {
+  soho: {
+    title: "소호인터넷",
+    headline: "매장 · 소규모 사무실을 위한 합리적인 인터넷",
+    desc: "LG U+ 소호인터넷은 100M~1G 속도를 부담 없는 요금으로. 인터넷전화·CCTV·IPTV 결합 시 추가 할인.",
+    points: ["100M 월 22,000원부터 (3년 약정)", "가입비·설치비 0원", "전화·CCTV·IPTV 결합 할인"],
+  },
+  phone: {
+    title: "기업 인터넷전화",
+    headline: "대표번호부터 AI 전화까지, 사무실 전화를 한 번에",
+    desc: "LG U+ 기업 인터넷전화는 착신전환·통화녹음·대표번호 기능을 기본 제공하며, 오피스넷과 결합 시 월 요금이 할인됩니다.",
+    points: ["인터넷 결합 시 전화기 무상 지원", "대표번호 · 착신전환 · 통화녹음", "U+ AI 전화 (통화 요약 · 자동 응대)"],
+  },
+  cctv: {
+    title: "지능형 CCTV",
+    headline: "스마트폰으로 언제 어디서나 사무실 · 매장 관제",
+    desc: "고화질 IP 카메라와 클라우드 저장, 이상 감지 알림까지. 오피스넷 고정IP와 함께 안정적인 원격 관제 환경을 구성합니다.",
+    points: ["고화질 IP 카메라 + 클라우드 저장", "침입 · 이상 감지 알림", "인터넷 결합 시 월 요금 할인"],
+  },
+} as const;
+
 export const nav = [
   { label: "특장점", href: "#features" },
   { label: "가입혜택", href: "#benefits" },
