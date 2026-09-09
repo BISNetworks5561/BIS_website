@@ -1,11 +1,16 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAdminKey } from "@/components/admin/AdminShell";
 import ThumbnailMaker from "@/components/studio/ThumbnailMaker";
 import type { BlogPost, StudioRequest } from "@/lib/studio/schema";
 import { postToHtml, postToText } from "@/lib/studio/render";
 import { cn } from "@/lib/utils";
+
+type ProviderKey = "claude" | "gemini" | "ollama";
+type ProviderInfo = { ready: boolean; model: string; hint: string };
+const PROVIDER_LABEL: Record<ProviderKey, string> = { claude: "Claude (Anthropic)", gemini: "Gemini (Google)", ollama: "Ollama (로컬/자체 서버)" };
+const PROVIDER_LS = "bis-studio-provider";
 
 const input = "w-full rounded-xl border border-line bg-white px-3 py-2.5 text-sm outline-none focus:border-brand";
 
@@ -31,13 +36,46 @@ export default function StudioClient() {
   const [tab, setTab] = useState<"post" | "thumb">("post");
   const [thumb, setThumb] = useState({ title: "", subtitle: "", badge: "LG U+ 오피스넷" });
   const [toast, setToast] = useState("");
+  const [providers, setProviders] = useState<Record<ProviderKey, ProviderInfo> | null>(null);
+  const [provider, setProvider] = useState<ProviderKey>("claude");
+  const [model, setModel] = useState("");
+
+  // 사용 가능한 엔진 조회 + 마지막 선택 복원
+  useEffect(() => {
+    if (!key) return;
+    fetch("/api/admin/generate", { headers: { "x-admin-key": key } })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.providers) {
+          setProviders(d.providers);
+          let saved: ProviderKey | null = null;
+          try {
+            saved = localStorage.getItem(PROVIDER_LS) as ProviderKey | null;
+          } catch {}
+          const order: ProviderKey[] = ["claude", "gemini", "ollama"];
+          const pick = saved && d.providers[saved]?.ready ? saved : order.find((p) => d.providers[p]?.ready) ?? "claude";
+          setProvider(pick);
+        }
+      })
+      .catch(() => {});
+  }, [key]);
+
+  const choose = (p: ProviderKey) => {
+    setProvider(p);
+    setModel("");
+    try {
+      localStorage.setItem(PROVIDER_LS, p);
+    } catch {}
+  };
 
   const generate = async () => {
     setError("");
     setLoading(true);
     try {
-      const body: StudioRequest = {
+      const body: StudioRequest & { provider: ProviderKey; model?: string } = {
         ...req,
+        provider,
+        model: model.trim() || undefined,
         keywords: keywordsText
           .split(/[,\n]/)
           .map((s) => s.trim())
@@ -154,6 +192,40 @@ export default function StudioClient() {
           <Field label="독자 (선택)">
             <input value={req.audience} onChange={(e) => setReq({ ...req, audience: e.target.value })} placeholder="예: 직원 10~30명 규모 사무실 총무 담당자" className={input} />
           </Field>
+          <div className="rounded-2xl bg-surface p-3">
+            <p className="mb-2 text-xs font-bold text-muted">글 생성 엔진</p>
+            <div className="flex flex-wrap gap-2">
+              {(["claude", "gemini", "ollama"] as ProviderKey[]).map((p) => {
+                const info = providers?.[p];
+                const ready = info?.ready ?? false;
+                return (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => choose(p)}
+                    title={ready ? `기본 모델: ${info?.model}` : `환경변수 ${info?.hint ?? ""} 필요`}
+                    className={cn(
+                      "rounded-full border px-3 py-1.5 text-xs font-bold",
+                      provider === p ? "border-brand bg-brand text-white" : "border-line bg-white text-ink/80",
+                      !ready && provider !== p && "opacity-50",
+                    )}
+                  >
+                    {PROVIDER_LABEL[p]}
+                    {providers && (ready ? " ●" : " ○")}
+                  </button>
+                );
+              })}
+            </div>
+            <input
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
+              placeholder={`모델 (비우면 ${providers?.[provider]?.model ?? "기본값"})`}
+              className="mt-2 w-full rounded-xl border border-line bg-white px-3 py-2 text-xs outline-none focus:border-brand"
+            />
+            {providers && !providers[provider]?.ready && (
+              <p className="mt-1 text-[11px] text-accent">이 엔진은 아직 설정되지 않았습니다. Vercel 환경변수 {providers[provider]?.hint} 를 추가하세요.</p>
+            )}
+          </div>
           <Field label="추가 요청·참고 내용 (선택)">
             <textarea
               value={req.notes}

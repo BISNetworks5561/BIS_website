@@ -96,4 +96,12 @@ supabase/migrations/    # consult_requests 테이블 SQL
 | `ANTHROPIC_API_KEY` | https://console.anthropic.com → API Keys 에서 발급 (글 생성용) |
 | `SUPABASE_SECRET_KEY` | Supabase → Project Settings → API Keys 의 `sb_secret_...` (상담 내역 조회용) |
 
+**글 생성 엔진 선택**: 스튜디오 화면에서 Claude / Gemini / Ollama 중 고를 수 있습니다. 설정된 엔진만 활성(●)으로 표시됩니다.
+
+| 엔진 | 환경변수 | 비고 |
+| --- | --- | --- |
+| Claude | `ANTHROPIC_API_KEY` | 기본 `claude-opus-5`, 구조화 출력으로 가장 안정적 |
+| Gemini | `GEMINI_API_KEY` (선택 `GEMINI_MODEL`) | 기본 `gemini-2.5-flash`, aistudio.google.com 발급 |
+| Ollama | `OLLAMA_BASE_URL`, `OLLAMA_MODEL` (선택 `OLLAMA_API_KEY`) | 로컬 `http://localhost:11434` 는 개발 서버에서만 동작. Vercel에서 쓰려면 외부 접근 가능한 Ollama 서버 또는 ollama.com 클라우드 필요 |
+
 배경 이미지는 `public/studio/thumb-bg-*.png` 프리셋 또는 브라우저에서 올린 내 이미지를 씁니다(브라우저에만 저장).
