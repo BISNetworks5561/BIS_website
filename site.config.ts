@@ -96,12 +96,12 @@ export const siteConfig = {
     ],
     /** 결합 가입 (인터넷전화·와이파이·CCTV 등 2개 이상 결합 시) */
     bundle: [
-      { speed: "100M", dynamic: 22000, static: 32000, popular: false },
-      { speed: "500M", dynamic: 34000, static: 39000, popular: true, badge: "가성비 1위" },
-      { speed: "1G", dynamic: 39000, static: 49000, popular: true, badge: "BEST" },
-      { speed: "2.5G", dynamic: 44000, static: 49000, popular: false },
-      { speed: "5G", dynamic: 64000, static: 64000, popular: false },
-      { speed: "10G", dynamic: 94000, static: 99000, popular: false },
+      { speed: "100M", dynamic: 25000, static: 35000, popular: false },
+      { speed: "500M", dynamic: 35000, static: 40000, popular: true, badge: "가성비 1위" },
+      { speed: "1G", dynamic: 40000, static: 50000, popular: true, badge: "BEST" },
+      { speed: "2.5G", dynamic: 50000, static: 55000, popular: false },
+      { speed: "5G", dynamic: 70000, static: 70000, popular: false },
+      { speed: "10G", dynamic: 100000, static: 105000, popular: false },
     ],
     bundleNote: "결합 요금은 기업인터넷전화·와이파이오피스·지능형 CCTV 중 1개 이상 함께 가입 시 적용되는 예시 요금입니다.",
     /** 고정IP 추가 시 개당 요금 (TODO) */
