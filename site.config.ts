@@ -103,7 +103,7 @@ export const siteConfig = {
       { speed: "5G", dynamic: 70000, static: 70000, popular: false },
       { speed: "10G", dynamic: 100000, static: 105000, popular: false },
     ],
-    bundleNote: "결합 요금은 기업인터넷전화·와이파이오피스·지능형 CCTV 중 1개 이상 함께 가입 시 적용되는 예시 요금입니다.",
+    bundleNote: "결합 요금은 오피스넷에 인터넷전화, IPTV, CCTV 중 1개 이상 함께 가입 시 적용되는 요금입니다.",
     /** 고정IP 추가 시 개당 요금 (TODO) */
     extraStaticIp: 5500,
     maxStaticIp: 20,

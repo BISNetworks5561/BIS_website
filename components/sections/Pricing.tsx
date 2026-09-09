@@ -82,12 +82,10 @@ export default function Pricing() {
 
       {/* 요금표 하단 안내사항 */}
       <div className="mt-6 space-y-3 text-sm text-ink/80">
-        {tab === "bundle" && (
-          <p className="flex gap-2">
-            <span className="text-muted">·</span>
-            {siteConfig.pricing.bundleNote}
-          </p>
-        )}
+        <p className="flex gap-2">
+          <span className="text-muted">·</span>
+          {siteConfig.pricing.bundleNote}
+        </p>
         <p className="flex gap-2">
           <span className="text-muted">·</span>
           {pricing.notes.staticIp}
