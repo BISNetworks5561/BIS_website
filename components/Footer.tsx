@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-12 md:px-8">
         <div className="flex flex-col gap-8 md:flex-row md:justify-between">
           <div>
-            <Image src={siteConfig.brand.logoFullSrc} alt={siteConfig.brand.nameEn} width={210} height={56} />
+            <Image src={siteConfig.brand.logoFullSrc} alt={siteConfig.brand.nameEn} width={966} height={240} className="h-12 w-auto" />
             <p className="mt-3"><UplusBadge>{siteConfig.brand.tagline}</UplusBadge></p>
             <a href={telHref(siteConfig.contact.phone)} className="mt-4 block text-2xl font-black text-brand-dark">
               {siteConfig.contact.phoneDisplay}

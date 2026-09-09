@@ -21,10 +21,12 @@ export const siteConfig = {
     tagline: "LG U+ 오피스넷 공식 판매센터",
     /** 로고 이미지가 없을 때 사용하는 텍스트 로고 */
     logoText: "BIS",
-    /** public/ 아래 로고 파일 경로 (없으면 텍스트 로고 사용) */
-    logoSrc: "/logo-mark.svg",
-    /** 가로형 풀 로고 (푸터용) */
-    logoFullSrc: "/logo.svg",
+    /** 육각 마크 단독 (정사각) */
+    logoSrc: "/logo-mark.png",
+    /** 가로형 풀 로고 (마크 + BISNETWORKS 워드마크), 비율 4.03:1 */
+    logoFullSrc: "/logo-full.png",
+    /** 세로형 원본 구성 로고 */
+    logoStackedSrc: "/logo-stacked.png",
   },
 
   /** 연락처 */
@@ -35,10 +37,10 @@ export const siteConfig = {
     phoneDisplay: "02-6956-9999",
     /** 담당 프로 직통 */
     manager: { name: "한진우 프로", phone: "010-5856-5561" },
-    /** TODO 장애 접수 전화 (LG U+ 기업 장애센터) */
-    faultPhone: "1544-0000",
-    /** TODO 이메일 */
-    email: "contact@example.com",
+    /** 장애 접수 전화 (LG U+ 기업 장애센터) */
+    faultPhone: "1544-8585",
+    /** 이메일 */
+    email: "bisnetworks@kakao.com",
     /** TODO 카카오톡 채널 URL (없으면 빈 문자열) */
     kakaoUrl: "",
     /** 상담 가능 시간 */
