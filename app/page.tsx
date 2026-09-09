@@ -9,7 +9,6 @@ import Benefits from "@/components/sections/Benefits";
 import Diagram from "@/components/sections/Diagram";
 import Industries from "@/components/sections/Industries";
 import Pricing from "@/components/sections/Pricing";
-import Bundles from "@/components/sections/Bundles";
 import Process from "@/components/sections/Process";
 import Trust from "@/components/sections/Trust";
 import Reviews from "@/components/sections/Reviews";
@@ -48,7 +47,6 @@ export default function HomePage() {
           <Diagram />
           <Industries />
           <Pricing />
-          <Bundles />
           <Process />
           <Trust />
           <Reviews />

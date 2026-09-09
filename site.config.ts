@@ -111,6 +111,7 @@ export const siteConfig = {
 
   /**
    * 추천 결합 패키지 (기존 bisnetworks.co.kr 게시 가격, 3년 약정·부가세 포함 기준)
+   * ※ 현재 사이트에서는 "추천 결합상품" 섹션을 삭제해 미사용. 필요 시 재사용 가능.
    * price 가 null 이면 "상담 문의"로 표시됩니다.
    */
   bundlePackages: [
