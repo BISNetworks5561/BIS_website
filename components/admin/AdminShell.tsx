@@ -3,23 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/site.config";
 import { cn } from "@/lib/utils";
+import Shortcuts from "@/components/admin/Shortcuts";
 
-export const ADMIN_KEY_LS = "bis-admin-key";
-const AdminKeyContext = createContext<string>("");
-export const useAdminKey = () => useContext(AdminKeyContext);
+import { ADMIN_KEY_LS, AdminKeyContext } from "@/components/admin/admin-key-context";
 
 /** 백오피스 공통 셸: 접근 키 게이트 + 좌측 메뉴 */
 const MENU = [
   { href: "/admin/studio", label: "콘텐츠 스튜디오", desc: "블로그 글 · 대표이미지" },
   { href: "/admin/consults", label: "상담 접수 현황", desc: "홈페이지 상담 신청 내역" },
-];
-const EXTERNAL = [
-  { href: siteConfig.site.url, label: "비즈네트웍스 웹사이트", desc: "www.bisnetworks.co.kr" },
-  { href: siteConfig.links.openingApp, label: "비즈오프닝 앱", desc: "app.bisnetworks.co.kr" },
-  { href: siteConfig.links.blog, label: "네이버 블로그", desc: "blog.naver.com/bisnetworks" },
 ];
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {
@@ -136,9 +130,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
               <span className="rounded-full bg-brand-dark px-2.5 py-0.5 text-[11px] font-bold text-white">백오피스</span>
             </div>
             <nav className="flex items-center gap-1 md:hidden">
-              <a href={siteConfig.links.openingApp} target="_blank" rel="noopener noreferrer" className="rounded-full px-3 py-1.5 text-xs font-bold text-muted">
-                오프닝 ↗
-              </a>
               {MENU.map((m) => (
                 <Link
                   key={m.href}
@@ -175,21 +166,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                 );
               })}
             </nav>
-            <p className="mt-5 mb-1 px-3 text-[11px] font-bold text-muted">바로가기</p>
-            <nav className="space-y-1">
-              {EXTERNAL.map((m) => (
-                <a
-                  key={m.href}
-                  href={m.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-surface"
-                >
-                  <span className="block text-sm font-bold">{m.label} ↗</span>
-                  <span className="block text-[11px] text-muted">{m.desc}</span>
-                </a>
-              ))}
-            </nav>
+            <Shortcuts />
             <div className="mt-6 rounded-xl border border-dashed border-line p-3 text-[11px] text-muted">
               이 영역은 메뉴에 노출되지 않고 검색엔진에서도 제외됩니다. 주소를 아는 사람만 접근 키로 들어올 수 있습니다.
             </div>

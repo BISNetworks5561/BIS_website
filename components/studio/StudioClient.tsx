@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useAdminKey } from "@/components/admin/AdminShell";
+import { useAdminKey } from "@/components/admin/admin-key-context";
 import ThumbnailMaker from "@/components/studio/ThumbnailMaker";
 import type { BlogPost, StudioRequest } from "@/lib/studio/schema";
 import { postToHtml, postToText } from "@/lib/studio/render";
@@ -205,18 +205,27 @@ export default function StudioClient() {
                     type="button"
                     onClick={() => choose(p)}
                     title={ready ? `기본 모델: ${info?.model}` : `환경변수 ${info?.hint ?? ""} 필요`}
+                    aria-pressed={provider === p}
                     className={cn(
-                      "rounded-full border px-3 py-1.5 text-xs font-bold",
-                      provider === p ? "border-brand bg-brand text-white" : "border-line bg-white text-ink/80",
-                      !ready && provider !== p && "opacity-50",
+                      "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-bold transition-colors",
+                      provider === p
+                        ? "border-brand bg-brand text-white shadow-[0_4px_12px_-4px_rgba(17,96,184,0.6)]"
+                        : "border-line bg-white text-ink/70 hover:border-brand/50",
                     )}
                   >
+                    {provider === p && <span aria-hidden>✓</span>}
                     {PROVIDER_LABEL[p]}
-                    {providers && (ready ? " ●" : " ○")}
+                    {providers && (
+                      <span
+                        aria-label={ready ? "설정됨" : "미설정"}
+                        className={cn("h-2 w-2 rounded-full", ready ? "bg-emerald-400" : provider === p ? "bg-white/40" : "bg-line")}
+                      />
+                    )}
                   </button>
                 );
               })}
             </div>
+            <p className="mt-1.5 text-[10px] text-muted">✓ 표시가 현재 선택된 엔진 · 초록 점은 API 키가 설정된 엔진</p>
             <input
               value={model}
               onChange={(e) => setModel(e.target.value)}

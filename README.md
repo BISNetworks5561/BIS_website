@@ -94,7 +94,9 @@ supabase/migrations/    # consult_requests 테이블 SQL
 | --- | --- |
 | `ADMIN_PASSCODE` | 백오피스 접근 키. 아무 문자열이나 정해서 넣고 로그인 화면에 같은 값 입력 |
 | `ANTHROPIC_API_KEY` | https://console.anthropic.com → API Keys 에서 발급 (글 생성용) |
-| `SUPABASE_SECRET_KEY` | Supabase → Project Settings → API Keys 의 `sb_secret_...` (상담 내역 조회용) |
+| `SUPABASE_SECRET_KEY` | Supabase → Project Settings → API Keys 의 `sb_secret_...` (상담 내역 조회·바로가기 저장용) |
+
+바로가기(+)를 팀 공용으로 저장하려면 `supabase/migrations/20260909000000_admin_settings.sql` 을 SQL Editor에서 한 번 실행하세요. 없으면 브라우저별 저장으로 동작합니다.
 
 **글 생성 엔진 선택**: 스튜디오 화면에서 Claude / Gemini / Ollama 중 고를 수 있습니다. 설정된 엔진만 활성(●)으로 표시됩니다.
 

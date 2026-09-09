@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useAdminKey } from "@/components/admin/AdminShell";
+import { useAdminKey } from "@/components/admin/admin-key-context";
 import { cn } from "@/lib/utils";
 
 type Row = {
