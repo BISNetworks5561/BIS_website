@@ -63,7 +63,7 @@ export const siteConfig = {
 
   /** 사이트 메타 */
   site: {
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bisnetworks.co.kr",
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bisnetworks.co.kr",
     title: "BIS네트웍스 | LG U+ 오피스넷 기업인터넷 판매센터",
     description:
       "PC 대수 무제한, 고정IP, 광케이블 최대 10Gbps. LG U+ 오피스넷 기업인터넷 가입비·설치비 0원, 월 요금 맞춤 설계. 전화 한 통으로 당일 견적.",

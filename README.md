@@ -74,7 +74,7 @@ supabase/migrations/    # consult_requests 테이블 SQL
 | CNAME | www | `cname.vercel-dns.com` |
 
 3. 전파(수 분~수 시간) 후 Vercel Domains 화면에서 Valid Configuration 확인
-4. Vercel 환경변수 `NEXT_PUBLIC_SITE_URL=https://bisnetworks.co.kr` 로 설정 후 재배포
+4. Vercel 환경변수 `NEXT_PUBLIC_SITE_URL=https://www.bisnetworks.co.kr` 로 설정 후 재배포
 
 ## 로고 교체
 
