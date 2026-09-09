@@ -57,10 +57,10 @@ export default function Pricing() {
                 className={cn("border-b border-line last:border-0", r.popular && "shadow-[inset_3px_0_0_0_var(--color-uplus)]")}
               >
                 <th scope="row" className="px-5 py-5 md:px-8">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 whitespace-nowrap">
                     <span className="text-xl font-black">{r.speed}</span>
                     {r.popular && (
-                      <span className="rounded-full bg-uplus px-2 py-0.5 text-[11px] font-bold text-white">
+                      <span className="whitespace-nowrap rounded-full bg-uplus px-2 py-0.5 text-[11px] font-bold text-white">
                         {"badge" in r && r.badge ? r.badge : "인기"}
                       </span>
                     )}
