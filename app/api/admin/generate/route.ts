@@ -8,7 +8,7 @@ export const runtime = "nodejs";
 export const maxDuration = 300;
 
 const BodySchema = StudioRequestSchema.extend({
-  provider: z.enum(["claude", "gemini", "ollama"]).default("claude"),
+  provider: z.enum(["claude", "gemini", "ollama"]).default("gemini"),
   model: z.string().max(80).optional(),
 });
 

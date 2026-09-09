@@ -9,7 +9,9 @@ import { cn } from "@/lib/utils";
 
 type ProviderKey = "claude" | "gemini" | "ollama";
 type ProviderInfo = { ready: boolean; model: string; hint: string };
-const PROVIDER_LABEL: Record<ProviderKey, string> = { claude: "Claude (Anthropic)", gemini: "Gemini (Google)", ollama: "Ollama (로컬/자체 서버)" };
+const PROVIDER_LABEL: Record<ProviderKey, string> = { gemini: "Gemini (Google)", claude: "Claude (Anthropic)", ollama: "Ollama (로컬/자체 서버)" };
+/** 표시 순서 = 기본 우선순위 (첫 번째가 기본 엔진) */
+const PROVIDER_ORDER: ProviderKey[] = ["gemini", "claude", "ollama"];
 const PROVIDER_LS = "bis-studio-provider";
 
 const input = "w-full rounded-xl border border-line bg-white px-3 py-2.5 text-sm outline-none focus:border-brand";
@@ -37,7 +39,7 @@ export default function StudioClient() {
   const [thumb, setThumb] = useState({ title: "", subtitle: "", badge: "LG U+ 오피스넷" });
   const [toast, setToast] = useState("");
   const [providers, setProviders] = useState<Record<ProviderKey, ProviderInfo> | null>(null);
-  const [provider, setProvider] = useState<ProviderKey>("claude");
+  const [provider, setProvider] = useState<ProviderKey>("gemini");
   const [model, setModel] = useState("");
 
   // 사용 가능한 엔진 조회 + 마지막 선택 복원
@@ -52,8 +54,7 @@ export default function StudioClient() {
           try {
             saved = localStorage.getItem(PROVIDER_LS) as ProviderKey | null;
           } catch {}
-          const order: ProviderKey[] = ["claude", "gemini", "ollama"];
-          const pick = saved && d.providers[saved]?.ready ? saved : order.find((p) => d.providers[p]?.ready) ?? "claude";
+          const pick = saved && d.providers[saved]?.ready ? saved : PROVIDER_ORDER.find((p) => d.providers[p]?.ready) ?? "gemini";
           setProvider(pick);
         }
       })
@@ -195,7 +196,7 @@ export default function StudioClient() {
           <div className="rounded-2xl bg-surface p-3">
             <p className="mb-2 text-xs font-bold text-muted">글 생성 엔진</p>
             <div className="flex flex-wrap gap-2">
-              {(["claude", "gemini", "ollama"] as ProviderKey[]).map((p) => {
+              {PROVIDER_ORDER.map((p) => {
                 const info = providers?.[p];
                 const ready = info?.ready ?? false;
                 return (
