@@ -80,3 +80,20 @@ supabase/migrations/    # consult_requests 테이블 SQL
 
 현재 `public/logo-mark.svg`(육각 마크), `public/logo.svg`(가로형 풀 로고)는 원본 로고를 참고해 만든 SVG 근사본입니다.
 원본 파일이 있으면 같은 파일명으로 덮어쓰거나, `site.config.ts` 의 `brand.logoSrc` / `brand.logoFullSrc` 경로를 바꿔 주세요.
+
+## 6. 백오피스 (`/admin`)
+
+메뉴에 없는 내부용 페이지입니다. 접근 키로 잠겨 있고 검색엔진 색인에서 제외됩니다.
+
+- **콘텐츠 스튜디오** (`/admin/studio`): 주제·키워드 → Claude(`claude-opus-5`)가 네이버 블로그 글 작성 → 서식 복사. 고정 배경 위에 문구만 바꿔 대표이미지 PNG 생성.
+- **상담 접수 현황** (`/admin/consults`): 홈페이지 상담 신청 목록, 상태(신규/연락함/완료)·메모 관리. `SUPABASE_SECRET_KEY` 필요.
+
+환경변수 (Vercel → Settings → Environment Variables, 아래 셋은 **Secret** 타입 권장):
+
+| 변수 | 설명 |
+| --- | --- |
+| `ADMIN_PASSCODE` | 백오피스 접근 키. 아무 문자열이나 정해서 넣고 로그인 화면에 같은 값 입력 |
+| `ANTHROPIC_API_KEY` | https://console.anthropic.com → API Keys 에서 발급 (글 생성용) |
+| `SUPABASE_SECRET_KEY` | Supabase → Project Settings → API Keys 의 `sb_secret_...` (상담 내역 조회용) |
+
+배경 이미지는 `public/studio/thumb-bg-*.png` 프리셋 또는 브라우저에서 올린 내 이미지를 씁니다(브라우저에만 저장).

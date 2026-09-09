@@ -63,6 +63,13 @@ export const siteConfig = {
     since: 2026,
   },
 
+  /** 외부 서비스 바로가기 */
+  links: {
+    /** 비즈오프닝(BIS_Opening) 앱 — /opening 으로 접속하면 이 주소로 이동 */
+    openingApp: "https://app.bisnetworks.co.kr",
+    blog: "https://blog.naver.com/bisnetworks",
+  },
+
   /** 사이트 메타 */
   site: {
     url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.bisnetworks.co.kr",
