@@ -46,7 +46,7 @@ export default function Footer() {
             © {new Date().getFullYear()} {siteConfig.brand.nameEn}. All rights reserved.
           </p>
           <p>
-            본 사이트는 LG U+ 오피스넷 공식 판매센터인 {siteConfig.brand.name}에서 운영하며, LG유플러스의 통신위탁판매대행업자입니다. 상품·요금·A/S는 LG U+ 기준을 따릅니다.
+            본 사이트는 LG U+ 기업통신상품 공식 판매센터인 {siteConfig.brand.name}에서 운영하며, LG유플러스의 통신위탁판매대행업자입니다. 상품·요금·A/S는 LG U+ 기준을 따릅니다.
           </p>
         </div>
       </div>

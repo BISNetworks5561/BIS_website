@@ -18,7 +18,7 @@ export const siteConfig = {
     /** 로고 아래 도메인 표기 */
     domainLabel: "bisnetworks.co.kr",
     /** 헤더/히어로에 노출되는 부제 */
-    tagline: "LG U+ 오피스넷 공식 판매센터",
+    tagline: "LG U+ 기업통신상품 공식 판매센터",
     /** 로고 이미지가 없을 때 사용하는 텍스트 로고 */
     logoText: "BIS",
     /** 육각 마크 단독 (정사각) */
