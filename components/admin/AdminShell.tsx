@@ -17,6 +17,7 @@ const MENU = [
   { href: "/admin/consults", label: "상담 접수 현황", desc: "홈페이지 상담 신청 내역" },
 ];
 const EXTERNAL = [
+  { href: siteConfig.site.url, label: "비즈네트웍스 웹사이트", desc: "www.bisnetworks.co.kr" },
   { href: siteConfig.links.openingApp, label: "비즈오프닝 앱", desc: "app.bisnetworks.co.kr" },
   { href: siteConfig.links.blog, label: "네이버 블로그", desc: "blog.naver.com/bisnetworks" },
 ];
