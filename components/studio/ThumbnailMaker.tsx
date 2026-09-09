@@ -41,6 +41,7 @@ export default function ThumbnailMaker({ title, subtitle, badge, category, onCha
   const [align, setAlign] = useState<"left" | "center">("left");
   const [scale, setScale] = useState(1);
   const [radius, setRadius] = useState(0);
+  const [vpos, setVpos] = useState<"top" | "middle" | "bottom">("middle");
   const [status, setStatus] = useState("");
 
   /* ── 라이브러리 불러오기 (서버 → 로컬) ── */
@@ -201,27 +202,45 @@ export default function ThumbnailMaker({ title, subtitle, badge, category, onCha
     const textColor = darkText ? "#0B2A5B" : "#FFFFFF";
     const subColor = darkText ? "rgba(11,42,91,0.75)" : "rgba(255,255,255,0.85)";
     const x = align === "center" ? W / 2 : pad;
+    const maxW = W - pad * 2;
     ctx.textAlign = align;
     ctx.textBaseline = "alphabetic";
 
-    let y = Math.round(H * 0.36);
+    // 1) 텍스트 블록 높이 먼저 계산 (뱃지 + 제목 + 보조문구)
+    const bsize = Math.round(W * 0.03 * scale);
+    const bh = bsize * 1.9;
+    const badgeBlock = badge.trim() ? bh + bsize * 1.0 : 0;
+    const tsize = Math.round(W * 0.085 * scale);
+    const lh = tsize * 1.22;
+    ctx.font = `900 ${tsize}px "${family}"`;
+    const lines = title
+      .split(/\n/)
+      .flatMap((l) => wrap(ctx, l, maxW))
+      .slice(0, 3);
+    const titleBlock = lines.length * lh;
+    const ssize = Math.round(W * 0.036 * scale);
+    ctx.font = `500 ${ssize}px "${family}"`;
+    const subLines = subtitle.trim() ? wrap(ctx, subtitle, maxW).slice(0, 2) : [];
+    const subBlock = subLines.length ? tsize * 0.35 + subLines.length * ssize * 1.5 : 0;
+    const total = badgeBlock + titleBlock + subBlock;
+
+    // 2) 세로 위치: 위 / 중간 / 아래
+    let y = vpos === "top" ? pad * 1.1 : vpos === "bottom" ? H - pad * 1.2 - total : (H - total) / 2;
+
     if (badge.trim()) {
-      const bsize = Math.round(W * 0.03 * scale);
       ctx.font = `700 ${bsize}px "${family}"`;
       const tw = ctx.measureText(badge).width;
       const bx = align === "center" ? x - tw / 2 - bsize * 0.8 : x;
-      const bh = bsize * 1.9;
-      const by = y - bh - bsize * 1.4;
       ctx.fillStyle = "#E6007E";
-      roundRect(ctx, bx, by, tw + bsize * 1.6, bh, bh / 2);
+      roundRect(ctx, bx, y, tw + bsize * 1.6, bh, bh / 2);
       ctx.fill();
       ctx.fillStyle = "#fff";
       ctx.textAlign = "left";
-      ctx.fillText(badge, bx + bsize * 0.8, by + bh * 0.68);
+      ctx.fillText(badge, bx + bsize * 0.8, y + bh * 0.68);
       ctx.textAlign = align;
+      y += badgeBlock;
     }
 
-    const tsize = Math.round(W * 0.085 * scale);
     ctx.font = `900 ${tsize}px "${family}"`;
     ctx.fillStyle = textColor;
     if (!darkText) {
@@ -229,26 +248,18 @@ export default function ThumbnailMaker({ title, subtitle, badge, category, onCha
       ctx.shadowBlur = tsize * 0.15;
       ctx.shadowOffsetY = tsize * 0.04;
     }
-    const maxW = W - pad * 2;
-    const lines = title
-      .split(/\n/)
-      .flatMap((l) => wrap(ctx, l, maxW))
-      .slice(0, 3);
-    const lh = tsize * 1.22;
-    lines.forEach((line, i) => ctx.fillText(line, x, y + i * lh + tsize));
-    y = y + lines.length * lh + tsize * 0.5;
+    lines.forEach((line, i) => ctx.fillText(line, x, y + i * lh + tsize * 0.9));
+    y += titleBlock;
     ctx.shadowColor = "transparent";
 
-    if (subtitle.trim()) {
-      const ssize = Math.round(W * 0.036 * scale);
+    if (subLines.length) {
+      y += tsize * 0.35;
       ctx.font = `500 ${ssize}px "${family}"`;
       ctx.fillStyle = subColor;
-      wrap(ctx, subtitle, maxW)
-        .slice(0, 2)
-        .forEach((line, i) => ctx.fillText(line, x, y + i * ssize * 1.5 + ssize));
+      subLines.forEach((line, i) => ctx.fillText(line, x, y + i * ssize * 1.5 + ssize));
     }
     ctx.restore();
-  }, [bg, ratio, title, subtitle, badge, darkText, overlay, align, scale, radius]);
+  }, [bg, ratio, title, subtitle, badge, darkText, overlay, align, scale, radius, vpos]);
 
   useEffect(() => {
     const t = setTimeout(() => void draw(), 60);
@@ -333,6 +344,27 @@ export default function ThumbnailMaker({ title, subtitle, badge, category, onCha
                 className={cn("rounded-full border px-3 py-1.5 text-xs font-bold", ratio === r ? "border-brand bg-brand text-white" : "border-line")}
               >
                 {r}
+              </button>
+            ))}
+          </div>
+        </Field>
+
+        <Field label="글씨 위치">
+          <div className="flex gap-2">
+            {(
+              [
+                ["top", "위"],
+                ["middle", "중간"],
+                ["bottom", "아래"],
+              ] as const
+            ).map(([v, l]) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() => setVpos(v)}
+                className={cn("rounded-full border px-3 py-1.5 text-xs font-bold", vpos === v ? "border-brand bg-brand text-white" : "border-line")}
+              >
+                {l}
               </button>
             ))}
           </div>

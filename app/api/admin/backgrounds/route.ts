@@ -3,7 +3,7 @@ import sharp from "sharp";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/admin/auth";
 import { getServiceClient } from "@/lib/supabase/server";
-import { BG_CATEGORIES, EMPTY_LIBRARY, type Background, type BackgroundLibrary, type BgCategory } from "@/lib/studio/backgrounds";
+import { BG_CATEGORIES, type Background, type BackgroundLibrary, type BgCategory } from "@/lib/studio/backgrounds";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -149,4 +149,3 @@ export async function DELETE(req: Request) {
   return NextResponse.json({ library: next });
 }
 
-export { EMPTY_LIBRARY };
