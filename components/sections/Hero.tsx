@@ -6,15 +6,15 @@ import { siteConfig, telHref } from "@/site.config";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-white lg:mt-6 lg:rounded-3xl lg:border">
+    <section className="relative overflow-hidden border-b border-line bg-white md:mt-6 md:rounded-3xl md:border">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-32 -top-32 h-[480px] w-[480px] rounded-full bg-brand-light blur-3xl md:h-[640px] md:w-[640px]"
       />
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-8 md:py-24">
+      <div className="relative mx-auto grid max-w-6xl gap-10 px-5 py-16 md:px-8 md:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-24">
         <div className="animate-fade-up">
           <p className="mb-4"><UplusBadge>{hero.eyebrow}</UplusBadge></p>
-          <h1 className="text-3xl font-black leading-[1.2] tracking-tight md:text-5xl md:leading-[1.15]">
+          <h1 className="text-3xl font-black leading-[1.2] tracking-tight md:text-4xl lg:text-5xl md:leading-[1.15]">
             {hero.title[0]}
             <br />
             <span className="text-brand-gradient">{hero.title[1]}</span>

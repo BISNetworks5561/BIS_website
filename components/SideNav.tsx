@@ -6,7 +6,7 @@ import { nav } from "@/lib/content";
 import { siteConfig, telHref } from "@/site.config";
 import { cn } from "@/lib/utils";
 
-/** 데스크톱 좌측 고정 메뉴 — 현재 보고 있는 섹션을 자동 강조 */
+/** 데스크톱 좌측 고정 메뉴 — 현재 보고 있는 섹션을 자동 강조 (LG U+ 상품 페이지 스타일) */
 export default function SideNav() {
   const [active, setActive] = useState<string>(nav[0].href);
 
@@ -29,41 +29,45 @@ export default function SideNav() {
   }, []);
 
   return (
-    <div className="sticky top-28 space-y-6">
-      <nav aria-label="섹션 메뉴" className="border-l border-line">
-        {nav.map((n) => {
-          const isActive = active === n.href;
-          return (
-            <a
-              key={n.href}
-              href={n.href}
-              aria-current={isActive ? "true" : undefined}
-              className={cn(
-                "-ml-px block border-l-2 py-2.5 pl-4 text-[15px] transition-colors",
-                isActive
-                  ? "border-brand font-bold text-brand"
-                  : "border-transparent font-medium text-ink/70 hover:border-line hover:text-ink",
-              )}
-            >
-              {n.label}
-            </a>
-          );
-        })}
+    <div className="sticky top-28 pr-6">
+      <nav aria-label="섹션 메뉴">
+        <ul className="space-y-1">
+          {nav.map((n) => {
+            const isActive = active === n.href;
+            return (
+              <li key={n.href}>
+                <a
+                  href={n.href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={cn(
+                    "inline-block py-2 text-[15px] transition-colors",
+                    isActive
+                      ? "font-bold text-brand underline decoration-2 underline-offset-[6px]"
+                      : "font-medium text-ink/80 hover:text-brand",
+                  )}
+                >
+                  {n.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       </nav>
 
-      <div className="rounded-2xl bg-brand-gradient p-4 text-white">
-        <p className="text-[11px] font-medium opacity-80">대표전화 · {siteConfig.contact.hours.split(" (")[0]}</p>
-        <a href={telHref(siteConfig.contact.phone)} className="mt-1 flex items-center gap-1.5 text-xl font-black">
-          <Icon name="phone" className="h-4 w-4" />
-          {siteConfig.contact.phoneDisplay}
-        </a>
-        <a
-          href="#consult"
-          className="mt-3 flex h-9 items-center justify-center rounded-full bg-white text-sm font-bold text-brand-dark"
-        >
-          무료 상담 신청
-        </a>
-      </div>
+      <div className="my-6 border-t border-line" />
+
+      <p className="text-xs font-medium text-muted">대표전화</p>
+      <a href={telHref(siteConfig.contact.phone)} className="mt-1 flex items-center gap-1.5 whitespace-nowrap text-lg font-black text-brand-dark lg:text-xl">
+        <Icon name="phone" className="h-4 w-4 text-brand" />
+        {siteConfig.contact.phoneDisplay}
+      </a>
+      <p className="mt-1 text-xs text-muted">{siteConfig.contact.hours}</p>
+      <a
+        href="#consult"
+        className="mt-4 flex h-10 items-center justify-center rounded-full bg-brand-gradient text-sm font-bold text-white"
+      >
+        무료 상담 신청
+      </a>
     </div>
   );
 }

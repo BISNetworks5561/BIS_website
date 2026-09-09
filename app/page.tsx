@@ -33,9 +33,9 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-10 lg:px-8">
+      <div className="mx-auto max-w-7xl md:grid md:grid-cols-[176px_minmax(0,1fr)] md:gap-6 md:px-6 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-10 lg:px-8">
         {/* 좌측 고정 메뉴 (데스크톱) */}
-        <aside className="hidden lg:block">
+        <aside className="hidden md:block">
           <SideNav />
         </aside>
 

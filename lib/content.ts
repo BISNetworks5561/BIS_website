@@ -6,7 +6,7 @@ import { siteConfig } from "@/site.config";
 export const nav = [
   { label: "특장점", href: "#features" },
   { label: "가입혜택", href: "#benefits" },
-  { label: "구성도", href: "#diagram" },
+  { label: "서비스구성도", href: "#diagram" },
   { label: "요금안내", href: "#pricing" },
   { label: "개통절차", href: "#process" },
   { label: "고객후기", href: "#reviews" },

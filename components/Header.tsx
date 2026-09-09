@@ -55,7 +55,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-brand-dark hover:bg-surface lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-brand-dark hover:bg-surface md:hidden"
             aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
             aria-expanded={open}
           >
@@ -65,7 +65,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="fixed inset-x-0 top-16 bottom-0 z-50 overflow-y-auto border-t border-line bg-white px-5 py-4 lg:hidden">
+        <div className="fixed inset-x-0 top-16 bottom-0 z-50 overflow-y-auto border-t border-line bg-white px-5 py-4 md:hidden">
           <p className="pb-2">
             <UplusBadge>{siteConfig.brand.tagline}</UplusBadge>
           </p>
