@@ -109,7 +109,9 @@ export const industries = {
 export const diagram = {
   title: "사무실까지 전용 광케이블로 직접 연결됩니다",
   subtitle: "서비스 구성도",
-  desc: "LG U+ 기업 백본망에서 사무실 장비까지 1:1 전용 구성. PC·서버·CCTV·전화가 한 회선으로 안정적으로 연결됩니다.",
+  desc: "LG U+ 전용망에서 광분배기 · 모뎀 · L2 스위치를 거쳐 고객사 PC까지 1:1 전용 구성. PC·서버·CCTV·전화가 한 회선으로 안정적으로 연결됩니다.",
+  imageSrc: "/diagram-officenet.png",
+  imageAlt: "U+오피스넷 서비스 구성도: 인터넷(전용망) → 광분배기(100MB~10GB) → 고객 모뎀 · L2 스위치 → 고객사 PC",
   backbone: { title: "LG U+ 기업 백본망", desc: "전국 광 네트워크 · 사전 감시 시스템" },
   line: { title: "광케이블 전용회선", desc: "최대 10Gbps 대칭 속도 · 고객 건물까지 1:1 구성" },
   office: { title: "사무실 장비", desc: "L2 스위치 · 기가 와이파이 공유기 (무상 지원)" },
@@ -155,6 +157,11 @@ export const benefits = {
       icon: "chart",
       title: "요금 최적화 맞춤 설계",
       desc: "PC 수·업종·건물 환경을 분석해 과하지도 부족하지도 않은 요금제를 설계합니다.",
+    },
+    {
+      icon: "phone",
+      title: "인터넷 전화기 무상 지원",
+      desc: "인터넷전화 결합 시 사무실용 IP 전화기를 무상으로 제공합니다.",
     },
     {
       icon: "tools",
