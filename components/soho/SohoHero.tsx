@@ -5,7 +5,7 @@ import { sohoHero as hero } from "@/lib/content-soho";
 import { siteConfig, telHref } from "@/site.config";
 
 export default function SohoHero() {
-  const from = siteConfig.pricingSoho.plans[0].price;
+  const from = siteConfig.pricingSoho.products[0].plans[0].price ?? 0;
   return (
     <section className="relative overflow-hidden border-b border-line bg-white md:mt-6 md:rounded-3xl md:border">
       <div aria-hidden className="pointer-events-none absolute -right-32 -top-32 h-[480px] w-[480px] rounded-full bg-brand-light blur-3xl md:h-[640px] md:w-[640px]" />
@@ -63,7 +63,7 @@ export default function SohoHero() {
                   {from.toLocaleString("ko-KR")}원<span className="text-sm font-medium opacity-80">부터</span>
                 </p>
               </div>
-              <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold ring-1 ring-white/30">부가세 포함 · 3년 약정</span>
+              <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold ring-1 ring-white/30">부가세 별도 · 3년 약정</span>
             </div>
           </div>
         </div>

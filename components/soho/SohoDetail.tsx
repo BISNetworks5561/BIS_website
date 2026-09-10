@@ -8,8 +8,8 @@ export default function SohoDetail() {
   return (
     <Section id="detail" tone="surface" eyebrow={d.subtitle} title={d.title} desc={d.desc}>
       {/* 속도별 추천 업종 */}
-      <ul className="grid gap-4 md:grid-cols-3">
-        {siteConfig.pricingSoho.plans.map((p) => (
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {siteConfig.pricingSoho.products[0].plans.map((p) => (
           <li key={p.speed} className="rounded-3xl bg-white p-6 shadow-card">
             <div className="flex items-center gap-2">
               <span className="text-2xl font-black">{p.speed}</span>

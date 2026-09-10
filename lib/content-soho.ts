@@ -108,15 +108,13 @@ export const sohoDetail = {
 export const sohoPricingCopy = {
   title: "매장 규모에 맞는 요금을 고르세요",
   subtitle: "요금 안내",
-  tabs: [
-    { key: "single", label: "소호인터넷 단독" },
-    { key: "bundle", label: "결합 요금" },
-  ] as const,
+  /** 탭은 site.config.pricingSoho.products 에서 가져옴 */
   cta: "이 요금으로 상담받기",
   notes: [
     "고정IP가 필요한 경우(외부에서 CCTV·POS 서버 접속 등) 추가 요금으로 신청할 수 있어요.",
     "개통 후 매장을 이전하면 이전 설치로 약정을 유지할 수 있어요. 이전 설치비는 상담 시 안내드립니다.",
     "표시 요금은 3년 약정 기준이며, 1년·2년 약정은 요금이 달라집니다.",
+    "인터넷전화, IPTV, CCTV 중 1개 이상 함께 가입하면 결합 할인이 적용됩니다.",
   ],
 };
 

@@ -149,17 +149,36 @@ export const siteConfig = {
   bundlePackagesNote: "3년 약정 · 부가세 포함 월 요금. 정상가 대비 결합 할인 적용 금액이며 프로모션에 따라 달라질 수 있습니다.",
 
   /**
-   * 소호인터넷 요금 (TODO 실제 요금 확정 후 수정)
-   * 단위: 원 / 월. 기존 사이트 표기(100M 22,000원, 3년 약정·부가세 포함)를 기준으로 한 자리표시자.
+   * 소호인터넷 요금 — 상품 2종(소호와이파이 / 소호결제안심), 속도 4단계
+   * 단위: 원 / 월, 부가세 별도, 3년 약정 기준. price 가 null 이면 "상담 문의"로 표시.
+   * TODO 소호결제안심 요금은 확정 후 입력
    */
   pricingSoho: {
-    vatNote: "부가세 포함 · 3년 약정 기준 · 지역 및 건물 환경에 따라 달라질 수 있습니다.",
-    plans: [
-      { speed: "100M", price: 22000, bundlePrice: 16500, popular: false, badge: "", desc: "소규모 매장 · 1~3인 사무실", fit: ["POS·카드단말", "CCTV 1~2대", "기본 웹·메신저"] },
-      { speed: "500M", price: 27500, bundlePrice: 22000, popular: true, badge: "가성비 1위", desc: "카페 · 학원 · 5~10인 사무실", fit: ["손님 Wi-Fi 동시 접속", "IPTV·음악 스트리밍", "클라우드 POS"] },
-      { speed: "1G", price: 33000, bundlePrice: 27500, popular: false, badge: "BEST", desc: "PC방 · 스튜디오 · 대용량 업로드", fit: ["대용량 파일 송수신", "다수 CCTV 원격 관제", "화상회의"] },
+    vatNote: "부가세 별도 · 3년 약정 기준 · 지역 및 건물 환경에 따라 달라질 수 있습니다.",
+    products: [
+      {
+        key: "wifi",
+        label: "소호와이파이",
+        desc: "인터넷 + 기가 와이파이 공유기 기본 구성. 손님용·직원용 Wi-Fi 분리 제공.",
+        plans: [
+          { speed: "100M", price: 20000, popular: false, badge: "", desc: "소규모 매장 · 1~3인 사무실", fit: ["POS·카드단말", "CCTV 1~2대", "기본 웹·메신저"] },
+          { speed: "200M", price: 23000, popular: false, badge: "", desc: "소형 매장 또는 사무실", fit: ["손님 Wi-Fi 소규모", "IPTV 1대", "클라우드 POS"] },
+          { speed: "500M", price: 30000, popular: true, badge: "가성비 1위", desc: "중소형 매장 또는 사무실", fit: ["손님 Wi-Fi 동시 접속", "IPTV·음악 스트리밍", "CCTV 다수"] },
+          { speed: "1G", price: 35000, popular: false, badge: "BEST", desc: "스튜디오 · 대용량 업로드", fit: ["대용량 파일 송수신", "다수 CCTV 원격 관제", "화상회의"] },
+        ],
+      },
+      {
+        key: "pay",
+        label: "소호결제안심",
+        desc: "인터넷 장애 시에도 카드 결제가 끊기지 않도록 백업 회선을 함께 구성하는 상품. 상세 조건은 상담 시 안내.",
+        plans: [
+          { speed: "100M", price: null, popular: false, badge: "", desc: "소규모 매장 · 1~3인 사무실", fit: ["결제 단말 백업 회선", "POS·카드단말", "CCTV 1~2대"] },
+          { speed: "200M", price: null, popular: false, badge: "", desc: "소형 매장 또는 사무실", fit: ["결제 단말 백업 회선", "손님 Wi-Fi 소규모", "IPTV 1대"] },
+          { speed: "500M", price: null, popular: true, badge: "추천", desc: "중소형 매장 또는 사무실", fit: ["결제 단말 백업 회선", "손님 Wi-Fi 동시 접속", "CCTV 다수"] },
+          { speed: "1G", price: null, popular: false, badge: "", desc: "스튜디오 · 대용량 업로드", fit: ["결제 단말 백업 회선", "대용량 파일 송수신", "화상회의"] },
+        ],
+      },
     ],
-    bundleNote: "결합 요금은 소호인터넷에 인터넷전화, IPTV, CCTV 중 1개 이상 함께 가입 시 적용되는 요금입니다.",
     extraStaticIp: 5500,
   },
 
