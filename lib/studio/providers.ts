@@ -237,7 +237,7 @@ class GeminiNotFound extends Error {
 }
 
 function rankGemini(n: string): number {
-  const m = n.match(/gemini-(d+(?:.d+)?)/);
+  const m = n.match(/gemini-(\d+(?:\.\d+)?)/);
   const v = m ? parseFloat(m[1]) : 0;
   const bad = /(exp|preview|tts|image|audio|live|embedding|thinking|robotics|computer)/i.test(n) ? -100 : 0;
   return v * 10 + (/flash-lite/.test(n) ? 0 : /flash/.test(n) ? 2 : /pro/.test(n) ? 1 : 0) + bad;
