@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Icon from "@/components/ui/Icon";
 import { nav } from "@/lib/content";
 import { siteConfig, telHref } from "@/site.config";
@@ -29,7 +30,7 @@ export default function SideNav() {
   }, []);
 
   return (
-    <div className="sticky top-28 pr-6">
+    <div className="sticky top-24 max-h-[calc(100vh-6.5rem)] overflow-y-auto pr-4 pb-8 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       <nav aria-label="섹션 메뉴">
         <ul className="space-y-1">
           {nav.map((n) => {
@@ -54,7 +55,41 @@ export default function SideNav() {
         </ul>
       </nav>
 
-      <div className="my-6 border-t border-line" />
+      <div className="my-5 border-t border-line" />
+
+      {/* 배너 바로가기: BIS오프닝 APP & 공식 블로그 */}
+      <div className="space-y-3">
+        <a
+          href={siteConfig.links.openingApp}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+        >
+          <Image
+            src="/banner-app.png"
+            alt="BIS오프닝 APP 다운/접속하기"
+            width={170}
+            height={253}
+            className="h-auto w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+          />
+        </a>
+        <a
+          href={siteConfig.links.blog}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+        >
+          <Image
+            src="/banner-blog.png"
+            alt="BISnetworks 공식 블로그 이웃추가하고 소통하기"
+            width={170}
+            height={253}
+            className="h-auto w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+          />
+        </a>
+      </div>
+
+      <div className="my-5 border-t border-line" />
 
       <p className="text-xs font-medium text-muted">대표전화</p>
       <a href={telHref(siteConfig.contact.phone)} className="mt-1 flex items-center gap-1.5 whitespace-nowrap text-lg font-black text-brand-dark lg:text-xl">
@@ -64,7 +99,7 @@ export default function SideNav() {
       <p className="mt-1 text-xs text-muted">{siteConfig.contact.hours}</p>
       <a
         href="#consult"
-        className="mt-4 flex h-10 items-center justify-center rounded-full bg-brand-gradient text-sm font-bold text-white"
+        className="mt-4 flex h-10 items-center justify-center rounded-full bg-brand-gradient text-sm font-bold text-white shadow-sm"
       >
         무료 상담 신청
       </a>

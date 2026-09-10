@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Icon from "@/components/ui/Icon";
 import Logo from "@/components/Logo";
 import ProductNav from "@/components/ProductNav";
@@ -81,6 +82,40 @@ export default function Header() {
               </a>
             ))}
           </nav>
+
+          {/* 배너 바로가기: BIS오프닝 APP & 공식 블로그 */}
+          <div className="mt-6 grid grid-cols-2 gap-3">
+            <a
+              href={siteConfig.links.openingApp}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:opacity-95"
+            >
+              <Image
+                src="/banner-app.png"
+                alt="BIS오프닝 APP 다운/접속하기"
+                width={170}
+                height={253}
+                className="h-auto w-full object-cover"
+              />
+            </a>
+            <a
+              href={siteConfig.links.blog}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:opacity-95"
+            >
+              <Image
+                src="/banner-blog.png"
+                alt="BISnetworks 공식 블로그 이웃추가하고 소통하기"
+                width={170}
+                height={253}
+                className="h-auto w-full object-cover"
+              />
+            </a>
+          </div>
           <a
             href={telHref(siteConfig.contact.phone)}
             className="mt-6 flex items-center justify-center gap-2 rounded-full bg-brand-gradient py-4 text-lg font-black text-white"
