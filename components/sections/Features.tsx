@@ -1,8 +1,11 @@
 import Section from "@/components/ui/Section";
 import Icon, { type IconName } from "@/components/ui/Icon";
-import { features } from "@/lib/content";
+import { features as defaultContent } from "@/lib/content";
 
-export default function Features() {
+export type FeaturesContent = typeof defaultContent;
+
+export default function Features({ content = defaultContent }: { content?: FeaturesContent }) {
+  const features = content;
   return (
     <Section id="features" eyebrow={features.subtitle} title={features.title}>
       <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

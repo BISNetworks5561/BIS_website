@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import Icon from "@/components/ui/Icon";
 import Banners from "@/components/Banners";
 import type { Banner } from "@/lib/banners";
-import { nav } from "@/lib/content";
+import { nav as defaultNav } from "@/lib/content";
 import { siteConfig, telHref } from "@/site.config";
 import { cn } from "@/lib/utils";
 
 /** 데스크톱 좌측 고정 메뉴 — 현재 보고 있는 섹션을 자동 강조 (LG U+ 상품 페이지 스타일) */
-export default function SideNav({ banners = [] }: { banners?: Banner[] }) {
-  const [active, setActive] = useState<string>(nav[0].href);
+type NavItem = { label: string; href: string };
+
+export default function SideNav({ banners = [], items = defaultNav }: { banners?: Banner[]; items?: readonly NavItem[] }) {
+  const nav = items;
+  const [active, setActive] = useState<string>(nav[0]?.href ?? "");
 
   useEffect(() => {
     const ids = nav.map((n) => n.href.slice(1));
@@ -28,7 +31,7 @@ export default function SideNav({ banners = [] }: { banners?: Banner[] }) {
     );
     els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [nav]);
 
   return (
     <div className="sticky top-24 max-h-[calc(100vh-6.5rem)] overflow-y-auto pr-4 pb-8 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">

@@ -1,9 +1,12 @@
 import Section from "@/components/ui/Section";
 import Icon from "@/components/ui/Icon";
-import { process } from "@/lib/content";
+import { process as defaultContent } from "@/lib/content";
 import { siteConfig, telHref } from "@/site.config";
 
-export default function Process() {
+export type ProcessContent = typeof defaultContent;
+
+export default function Process({ content = defaultContent }: { content?: ProcessContent }) {
+  const process = content;
   return (
     <Section id="process" tone="surface" eyebrow={process.subtitle} title={process.title} desc={process.leadTime}>
       <ol className="grid gap-5 md:grid-cols-4">

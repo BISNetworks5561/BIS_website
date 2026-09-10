@@ -148,6 +148,21 @@ export const siteConfig = {
   ],
   bundlePackagesNote: "3년 약정 · 부가세 포함 월 요금. 정상가 대비 결합 할인 적용 금액이며 프로모션에 따라 달라질 수 있습니다.",
 
+  /**
+   * 소호인터넷 요금 (TODO 실제 요금 확정 후 수정)
+   * 단위: 원 / 월. 기존 사이트 표기(100M 22,000원, 3년 약정·부가세 포함)를 기준으로 한 자리표시자.
+   */
+  pricingSoho: {
+    vatNote: "부가세 포함 · 3년 약정 기준 · 지역 및 건물 환경에 따라 달라질 수 있습니다.",
+    plans: [
+      { speed: "100M", price: 22000, bundlePrice: 16500, popular: false, badge: "", desc: "소규모 매장 · 1~3인 사무실", fit: ["POS·카드단말", "CCTV 1~2대", "기본 웹·메신저"] },
+      { speed: "500M", price: 27500, bundlePrice: 22000, popular: true, badge: "가성비 1위", desc: "카페 · 학원 · 5~10인 사무실", fit: ["손님 Wi-Fi 동시 접속", "IPTV·음악 스트리밍", "클라우드 POS"] },
+      { speed: "1G", price: 33000, bundlePrice: 27500, popular: false, badge: "BEST", desc: "PC방 · 스튜디오 · 대용량 업로드", fit: ["대용량 파일 송수신", "다수 CCTV 원격 관제", "화상회의"] },
+    ],
+    bundleNote: "결합 요금은 소호인터넷에 인터넷전화, IPTV, CCTV 중 1개 이상 함께 가입 시 적용되는 요금입니다.",
+    extraStaticIp: 5500,
+  },
+
   /** 신뢰 지표 (TODO 실제 수치로 교체) */
   stats: [
     { value: 18800, suffix: "+", label: "누적 기업 고객" },

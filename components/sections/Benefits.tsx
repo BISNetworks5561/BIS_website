@@ -1,8 +1,11 @@
 import Section from "@/components/ui/Section";
 import Icon, { type IconName } from "@/components/ui/Icon";
-import { benefits } from "@/lib/content";
+import { benefits as defaultContent } from "@/lib/content";
 
-export default function Benefits() {
+export type BenefitsContent = typeof defaultContent;
+
+export default function Benefits({ content = defaultContent }: { content?: BenefitsContent }) {
+  const benefits = content;
   return (
     <Section id="benefits" eyebrow={benefits.subtitle} title={benefits.title}>
       <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

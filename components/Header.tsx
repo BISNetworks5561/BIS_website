@@ -7,11 +7,22 @@ import Banners from "@/components/Banners";
 import type { Banner } from "@/lib/banners";
 import ProductNav from "@/components/ProductNav";
 import UplusBadge from "@/components/ui/UplusBadge";
-import { nav } from "@/lib/content";
+import { nav as defaultNav } from "@/lib/content";
 import { siteConfig, telHref } from "@/site.config";
 import { cn } from "@/lib/utils";
 
-export default function Header({ banners = [] }: { banners?: Banner[] }) {
+type NavItem = { label: string; href: string };
+
+export default function Header({
+  banners = [],
+  navItems = defaultNav,
+  navLabel = "오피스넷 바로가기",
+}: {
+  banners?: Banner[];
+  navItems?: readonly NavItem[];
+  navLabel?: string;
+}) {
+  const nav = navItems;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -70,7 +81,7 @@ export default function Header({ banners = [] }: { banners?: Banner[] }) {
             <UplusBadge>{siteConfig.brand.tagline}</UplusBadge>
           </p>
           <ProductNav variant="mobile" />
-          <p className="mt-5 mb-1 text-xs font-bold text-muted">오피스넷 바로가기</p>
+          <p className="mt-5 mb-1 text-xs font-bold text-muted">{navLabel}</p>
           <nav className="flex flex-col" aria-label="모바일 메뉴">
             {nav.map((n) => (
               <a
