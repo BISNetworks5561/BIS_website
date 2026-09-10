@@ -178,7 +178,6 @@ export const siteConfig = {
         ],
       },
     ],
-    extraStaticIp: 5500,
   },
 
   /** 신뢰 지표 (TODO 실제 수치로 교체) */

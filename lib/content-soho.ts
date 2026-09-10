@@ -15,8 +15,8 @@ export const sohoHero = {
   eyebrow: "LG U+ 소호인터넷",
   title: ["매장 · 소규모 사무실 인터넷,", "필요한 만큼만 합리적으로"],
   subtitle:
-    "LG U+ 소호인터넷은 100M~1G 속도를 부담 없는 요금으로 제공합니다. POS·CCTV·손님 Wi-Fi까지 한 회선으로, 가입비·설치비 0원.",
-  bullets: ["100M~1G 선택", "가입비·설치비 0원", "전화·IPTV·CCTV 결합 할인", "기가 와이파이 무상"],
+    "LG U+ 소호인터넷은 100M~1G 속도를 부담 없는 요금으로 제공합니다. POS·CCTV·손님 Wi-Fi까지 한 회선으로, 가입비·설치비 지원.",
+  bullets: ["100M~1G 선택", "가입비·설치비 지원", "전화·IPTV·CCTV 결합 할인", "기가 와이파이 무상"],
   primaryCta: "무료 상담 신청",
   secondaryCta: "전화 상담",
   note: "매장 주소만 알려주시면 개통 가능 여부와 요금을 바로 안내해 드립니다.",
@@ -24,7 +24,7 @@ export const sohoHero = {
     title: "소상공인 전용 인터넷",
     stats: [
       { k: "속도", v: "100M~1G" },
-      { k: "가입·설치비", v: "0원" },
+      { k: "가입·설치비", v: "지원" },
       { k: "결합 할인", v: "전화·TV·CCTV" },
       { k: "Wi-Fi 공유기", v: "무상" },
     ],
@@ -42,8 +42,8 @@ export const sohoFeatures = {
     },
     {
       icon: "gift",
-      title: "초기 비용 0원",
-      desc: "가입비·설치비·기본 공사비가 없습니다. 오픈 준비로 지출이 많은 시기에 부담을 줄여 드립니다.",
+      title: "초기 비용 지원",
+      desc: "가입비, 설치비, 기본공사 지원으로 오픈 준비로 지출이 많은 시기에 부담을 줄여 드립니다.",
     },
     {
       icon: "wifi",
@@ -62,11 +62,11 @@ export const sohoBenefits = {
   title: "소호인터넷 가입 시 드리는 혜택",
   subtitle: "가입 혜택",
   items: [
-    { icon: "gift", title: "가입비 · 설치비 0원", desc: "초기 비용 없이 월 요금만 납부하세요." },
+    { icon: "gift", title: "가입비 · 설치비 지원", desc: "초기 비용 부담 없이 시작하세요." },
     { icon: "wifi", title: "기가 와이파이 공유기 무상", desc: "손님용 Wi-Fi 분리 설정까지 도와드립니다." },
     { icon: "phone", title: "인터넷전화 결합 시 전화기 무상", desc: "매장 대표번호용 IP 전화기를 무상 제공합니다." },
     { icon: "camera", title: "CCTV 결합 할인", desc: "지능형 CCTV와 함께 가입하면 월 요금이 추가로 할인됩니다." },
-    { icon: "chart", title: "요금 맞춤 설계", desc: "업종·좌석 수·단말 수를 보고 과하지 않은 요금제를 제안합니다." },
+    { icon: "tools", title: "네트워크 공사 지원", desc: "매장 랜 배선, 공유기 위치 조정 등 네트워크 공사를 지원합니다." },
   ],
   note: "혜택은 가입 상품·지역·프로모션 기간에 따라 달라질 수 있습니다. 자세한 내용은 상담 시 안내드립니다.",
 };
@@ -81,7 +81,7 @@ export const sohoDetail = {
       { icon: "wifi", name: "기가 와이파이 공유기", desc: "손님용 · 직원용 SSID 분리" },
       { icon: "server", name: "모뎀 · 설치 공사", desc: "매장 내 배선 정리 포함" },
       { icon: "headset", name: "장애 접수 · 출동", desc: "LG U+ 장애센터 + 전담 관리" },
-      { icon: "shield", name: "유동IP 1개", desc: "고정IP 필요 시 추가 가능" },
+      { icon: "shield", name: "사장님광장 지원", desc: "LG U+ 소상공인 전용 혜택 서비스 이용 지원" },
     ],
   },
   addons: {
@@ -97,9 +97,9 @@ export const sohoDetail = {
     rows: [
       { label: "추천 대상", soho: "매장 · 1~10인 소규모 사무실", office: "10인 이상 사무실 · 서버 운영 기업" },
       { label: "속도", soho: "100M ~ 1G", office: "100M ~ 10G (대칭)" },
-      { label: "고정IP", soho: "필요 시 추가", office: "최대 20개" },
+      { label: "고정IP", soho: "제공 불가", office: "최대 20개" },
       { label: "PC 연결", soho: "일반 사용 기준", office: "대수 무제한" },
-      { label: "장애 대응", soho: "장애센터 접수 · 출동", office: "기업 전담 장애센터 365일 24시간" },
+      { label: "장애 대응", soho: "소상공인 전담 장애센터 365일 24시간", office: "기업 전담 장애센터 365일 24시간" },
     ],
     note: "서버·VPN·다수 고정IP가 필요하면 오피스넷을 권장합니다. 상담 시 매장 환경에 맞춰 안내드립니다.",
   },
@@ -111,10 +111,10 @@ export const sohoPricingCopy = {
   /** 탭은 site.config.pricingSoho.products 에서 가져옴 */
   cta: "이 요금으로 상담받기",
   notes: [
-    "고정IP가 필요한 경우(외부에서 CCTV·POS 서버 접속 등) 추가 요금으로 신청할 수 있어요.",
     "개통 후 매장을 이전하면 이전 설치로 약정을 유지할 수 있어요. 이전 설치비는 상담 시 안내드립니다.",
     "표시 요금은 3년 약정 기준이며, 1년·2년 약정은 요금이 달라집니다.",
     "인터넷전화, IPTV, CCTV 중 1개 이상 함께 가입하면 결합 할인이 적용됩니다.",
+    "소호인터넷은 고정IP를 제공하지 않아요. 서버·VPN 등 고정IP가 필요하면 오피스넷(기업인터넷)으로 안내드립니다.",
   ],
 };
 
