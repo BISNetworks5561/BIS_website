@@ -180,6 +180,62 @@ export const siteConfig = {
     ],
   },
 
+  /**
+   * 기업 인터넷전화 요금 — LG U+ 공시 기준(부가세 포함). 프로모션에 따라 변동 가능.
+   * 참고: lguplus.com/biz 기업 인터넷전화(B000000149)
+   */
+  pricingPhone: {
+    vatNote: "부가세 포함 · LG U+ 공시 기준 · 약정·결합 조건에 따라 달라질 수 있습니다.",
+    /** 단말기 이미지 (public/phone/). 실제 IP-520GA 제품 사진으로 교체 가능 */
+    deviceImage: "/phone/ip520ga.png",
+    plans: [
+      {
+        key: "basic",
+        name: "일반형",
+        target: "1~5명 · 소형 매장·사무실",
+        baseFee: 2200,
+        baseFeeBundled: 1100,
+        popular: false,
+        badge: "",
+        calls: ["U+ 인터넷전화 가입자 간 무제한 무료", "시내·시외 41.8원/3분", "휴대폰 12.87원/10초"],
+      },
+      {
+        key: "centrex",
+        name: "센트릭스",
+        target: "5~30명 · 중소기업",
+        baseFee: 3300,
+        baseFeeBundled: null,
+        popular: true,
+        badge: "추천",
+        calls: ["내선통화 무료 · 당겨받기 · 돌려주기", "자유통화 요금제 월 5,500원~57,200원 (무료통화 25분~1,700분)", "시내·시외 41.8원/3분 · 휴대폰 12.87원/10초"],
+        baseFeeNote: "3년 약정 기준",
+      },
+      {
+        key: "dcs",
+        name: "교환기 설치형 (DCS)",
+        target: "30회선 이상 · 다지점",
+        baseFee: 2200,
+        baseFeeBundled: 1100,
+        popular: false,
+        badge: "",
+        calls: ["자유통화 요금제 월 5,500원~57,200원", "전수녹취 · 멀티라인 월 1,100원", "교환기 3년 무료 유지보수"],
+      },
+    ],
+    /** 통화료 (공통) */
+    callRates: [
+      { label: "U+ 인터넷전화 가입자 간", value: "무제한 무료" },
+      { label: "시내 · 시외", value: "41.8원 / 3분" },
+      { label: "휴대폰", value: "12.87원 / 10초" },
+      { label: "전국대표번호", value: "42.9원 또는 71.5원 / 3분 (유형별)" },
+    ],
+    fees: [
+      { label: "신규 설치비", value: "22,000원" },
+      { label: "이전 설치비", value: "11,000원" },
+      { label: "번호이동 수수료", value: "2,000원" },
+      { label: "자동이체 할인", value: "요금의 1%" },
+    ],
+  },
+
   /** 신뢰 지표 (TODO 실제 수치로 교체) */
   stats: [
     { value: 18800, suffix: "+", label: "누적 기업 고객" },
