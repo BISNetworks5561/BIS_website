@@ -87,6 +87,7 @@ supabase/migrations/    # consult_requests 테이블 SQL
 
 - **콘텐츠 스튜디오** (`/admin/studio`): 주제·키워드 → Claude(`claude-opus-5`)가 네이버 블로그 글 작성 → 서식 복사. 고정 배경 위에 문구만 바꿔 대표이미지 PNG 생성.
 - **상담 접수 현황** (`/admin/consults`): 홈페이지 상담 신청 목록, 상태(신규/연락함/완료)·메모 관리. `SUPABASE_SECRET_KEY` 필요.
+- **BIS opening 사용법** (`/admin/opening`): 비즈오프닝 앱(`app.bisnetworks.co.kr`) 접속, 청약~개통 5단계 프로세스, 구비서류 체크리스트, 고객 안내 문자 템플릿(복사), 비상연락망/FAQ.
 
 환경변수 (Vercel → Settings → Environment Variables, 아래 셋은 **Secret** 타입 권장):
 
@@ -103,7 +104,7 @@ supabase/migrations/    # consult_requests 테이블 SQL
 | 엔진 | 환경변수 | 비고 |
 | --- | --- | --- |
 | Claude | `ANTHROPIC_API_KEY` | 기본 `claude-opus-5`, 구조화 출력으로 가장 안정적 |
-| Gemini | `GEMINI_API_KEY` (선택 `GEMINI_MODEL`) | 기본 `gemini-2.5-flash`, aistudio.google.com 발급 |
+| Gemini | `GEMINI_API_KEY` (선택 `GEMINI_MODEL`) | 기본 `gemini-3.6-flash`, aistudio.google.com 발급 |
 | Ollama | `OLLAMA_BASE_URL`, `OLLAMA_MODEL` (선택 `OLLAMA_API_KEY`) | 로컬 `http://localhost:11434` 는 개발 서버에서만 동작. Vercel에서 쓰려면 외부 접근 가능한 Ollama 서버 또는 ollama.com 클라우드 필요 |
 
 **대표이미지 배경**: 기본 5종(`public/studio/bg-*.png`) + 직접 올린 이미지. 카테고리(공통/오피스넷/소호인터넷/인터넷전화/CCTV)별로 등록하고 ★로 기본 배경을 지정하면 글의 상품에 맞는 배경이 자동 선택됩니다. 업로드 이미지는 Supabase Storage `studio` 버킷(자동 생성)에 저장되어 팀 공용으로 보이며, `SUPABASE_SECRET_KEY`·`admin_settings` 테이블이 없으면 브라우저에만 저장됩니다. 모서리 라운드(투명 PNG)도 지원합니다.

@@ -14,6 +14,7 @@ import { ADMIN_KEY_LS, AdminKeyContext } from "@/components/admin/admin-key-cont
 const MENU = [
   { href: "/admin/studio", label: "콘텐츠 스튜디오", desc: "블로그 글 · 대표이미지" },
   { href: "/admin/consults", label: "상담 접수 현황", desc: "홈페이지 상담 신청 내역" },
+  { href: "/admin/opening", label: "BIS opening 사용법", desc: "비즈오프닝 앱 가이드 · 매뉴얼" },
 ];
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {

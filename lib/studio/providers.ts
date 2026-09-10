@@ -9,7 +9,7 @@ export type Provider = "claude" | "gemini" | "ollama";
 
 export const DEFAULT_MODELS: Record<Provider, string> = {
   claude: "claude-opus-5",
-  gemini: process.env.GEMINI_MODEL || "gemini-2.5-flash",
+  gemini: process.env.GEMINI_MODEL || "gemini-3.6-flash",
   ollama: process.env.OLLAMA_MODEL || "gemma3:12b",
 };
 
@@ -188,33 +188,62 @@ async function listGeminiModels(key: string): Promise<string[]> {
   return names;
 }
 
-/** 요청한 모델이 없으면 가장 최신 flash → pro 순으로 대체 */
-function pickGeminiModel(requested: string, available: string[]): string | null {
-  if (!available.length) return null;
-  if (available.includes(requested)) return requested;
-  const version = (n: string) => {
-    const m = n.match(/gemini-(\d+(?:\.\d+)?)/);
-    return m ? parseFloat(m[1]) : 0;
-  };
-  const stable = available.filter((n) => /^gemini-\d/.test(n) && !/(exp|preview|tts|image|audio|live|embedding|thinking|robotics|computer)/i.test(n));
-  const rank = (n: string) => version(n) * 10 + (/flash-lite/.test(n) ? 0 : /flash/.test(n) ? 2 : /pro/.test(n) ? 1 : 0);
-  const sorted = [...(stable.length ? stable : available)].sort((a, b) => rank(b) - rank(a));
-  return sorted[0] ?? null;
-}
+
+/** 404(모델 없음/신규 사용자 미제공) 시 순서대로 시도할 후보 */
+const GEMINI_FALLBACKS = ["gemini-3.6-flash", "gemini-flash-latest", "gemini-3.6-pro", "gemini-pro-latest"];
 
 async function withGemini(input: StudioRequest, model: string): Promise<GenerateResult> {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new ProviderError("GEMINI_API_KEY 환경변수가 없습니다. aistudio.google.com 에서 발급하세요.", 503);
-  return callGemini(input, model, key, true);
+
+  const tried = new Set<string>();
+  const details: string[] = [];
+  const attempt = async (m: string) => {
+    if (tried.has(m)) return null;
+    tried.add(m);
+    try {
+      return await callGemini(input, m, key, "v1beta");
+    } catch (e) {
+      if (e instanceof GeminiNotFound) {
+        details.push(`${m}: ${e.detail}`);
+        console.warn(`[studio] gemini 404 ${m}: ${e.detail}`);
+        return null;
+      }
+      throw e;
+    }
+  };
+
+  // 1) 요청 모델 → 2) 알려진 최신 후보 → 3) 계정 모델 목록에서 선택
+  for (const m of [model, ...GEMINI_FALLBACKS]) {
+    const r = await attempt(m);
+    if (r) return r;
+  }
+  const available = await listGeminiModels(key).catch(() => [] as string[]);
+  const ranked = [...available].sort((a, b) => rankGemini(b) - rankGemini(a)).filter((m) => !tried.has(m)).slice(0, 4);
+  for (const m of ranked) {
+    const r = await attempt(m);
+    if (r) return r;
+  }
+  throw new ProviderError(
+    `Gemini 모델을 찾지 못했습니다. 시도: ${[...tried].join(", ")}. 구글 응답: ${details[0] ?? "(없음)"} — 환경변수 GEMINI_MODEL 에 사용 가능한 모델명을 지정하세요.`,
+    502,
+  );
 }
 
-async function callGemini(
-  input: StudioRequest,
-  model: string,
-  key: string,
-  allowFallback: boolean,
-  apiVersion: "v1beta" | "v1" = "v1beta",
-): Promise<GenerateResult> {
+class GeminiNotFound extends Error {
+  constructor(public detail: string) {
+    super(detail);
+  }
+}
+
+function rankGemini(n: string): number {
+  const m = n.match(/gemini-(d+(?:.d+)?)/);
+  const v = m ? parseFloat(m[1]) : 0;
+  const bad = /(exp|preview|tts|image|audio|live|embedding|thinking|robotics|computer)/i.test(n) ? -100 : 0;
+  return v * 10 + (/flash-lite/.test(n) ? 0 : /flash/.test(n) ? 2 : /pro/.test(n) ? 1 : 0) + bad;
+}
+
+async function callGemini(input: StudioRequest, model: string, key: string, apiVersion: "v1beta" | "v1"): Promise<GenerateResult> {
   const url = `https://generativelanguage.googleapis.com/${apiVersion}/models/${encodeURIComponent(model)}:generateContent`;
   const res = await fetch(url, {
     method: "POST",
@@ -235,19 +264,11 @@ async function callGemini(
       detail = body.slice(0, 200);
     }
     if (res.status === 404) {
-      console.warn(`[studio] gemini 404 (${apiVersion}, ${model}): ${detail}`);
-      // 1) 같은 모델을 v1 주소로 재시도 (키 종류에 따라 v1beta 가 막힌 경우)
-      if (apiVersion === "v1beta") return callGemini(input, model, key, allowFallback, "v1");
-      // 2) 계정에서 사용 가능한 다른 모델로 대체
-      if (allowFallback) {
-        const available = await listGeminiModels(key);
-        const alt = pickGeminiModel(model, available);
-        if (alt && alt !== model) return callGemini(input, alt, key, false);
+      // 키 종류에 따라 v1beta 가 막힌 경우 v1 로 한 번 재시도
+      if (apiVersion === "v1beta" && !/no longer available|not found for API version/i.test(detail)) {
+        return callGemini(input, model, key, "v1");
       }
-      throw new ProviderError(
-        `Gemini 모델 "${model}" 호출이 404로 거부되었습니다. 구글 응답: ${detail || "(상세 없음)"} — API 키가 AI Studio(aistudio.google.com)에서 만든 키인지, Google Cloud 콘솔에서 'Generative Language API' 가 사용 설정되어 있는지 확인하세요.`,
-        502,
-      );
+      throw new GeminiNotFound(detail || "(상세 없음)");
     }
     if (res.status === 400 || res.status === 403) throw new ProviderError(`Gemini 인증/요청 오류 (${res.status}): ${detail}`, 502);
     if (res.status === 429) throw new ProviderError("Gemini 요청 한도 초과. 잠시 후 다시 시도하세요.", 429);
