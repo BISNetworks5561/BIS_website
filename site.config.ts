@@ -188,6 +188,9 @@ export const siteConfig = {
     vatNote: "부가세 포함 · LG U+ 공시 기준 · 약정·결합 조건에 따라 달라질 수 있습니다.",
     /** 단말기 이미지 (public/phone/). 실제 IP-520GA 제품 사진으로 교체 가능 */
     deviceImage: "/phone/ip520ga.png",
+    /** 사진 배경색 (사진 여백과 카드 배경을 맞추기 위함) */
+    deviceImageBg: "#ffffff",
+    deviceImageSize: { width: 706, height: 451 },
     plans: [
       {
         key: "basic",
@@ -215,7 +218,7 @@ export const siteConfig = {
         name: "교환기 설치형 (DCS)",
         target: "30회선 이상 · 다지점",
         baseFee: 2200,
-        baseFeeBundled: 1100,
+        baseFeeBundled: null,
         popular: false,
         badge: "",
         calls: ["자유통화 요금제 월 5,500원~57,200원", "전수녹취 · 멀티라인 월 1,100원", "교환기 3년 무료 유지보수"],
@@ -229,9 +232,8 @@ export const siteConfig = {
       { label: "전국대표번호", value: "42.9원 또는 71.5원 / 3분 (유형별)" },
     ],
     fees: [
-      { label: "신규 설치비", value: "22,000원" },
-      { label: "이전 설치비", value: "11,000원" },
-      { label: "번호이동 수수료", value: "2,000원" },
+      { label: "설치비", value: "지원" },
+      { label: "번호이동 수수료", value: "지원" },
       { label: "자동이체 할인", value: "요금의 1%" },
     ],
   },

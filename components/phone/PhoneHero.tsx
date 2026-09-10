@@ -50,14 +50,16 @@ export default function PhoneHero() {
           <div className="relative rounded-3xl border border-line bg-white p-6 shadow-card md:p-8">
             <span className="absolute right-6 top-6 rounded-full bg-uplus px-3 py-1 text-xs font-bold text-white">{hero.device.badge}</span>
             <UplusBadge>기본 제공 단말기</UplusBadge>
-            <Image
-              src={p.deviceImage}
-              alt={`LG U+ 인터넷전화 단말기 ${hero.device.model}`}
-              width={1000}
-              height={760}
-              priority
-              className="mx-auto mt-4 h-auto w-full max-w-md"
-            />
+            <div className="mt-4 overflow-hidden rounded-2xl" style={{ backgroundColor: p.deviceImageBg }}>
+              <Image
+                src={p.deviceImage}
+                alt={`LG U+ 인터넷전화 단말기 ${hero.device.model}`}
+                width={p.deviceImageSize.width}
+                height={p.deviceImageSize.height}
+                priority
+                className="mx-auto h-auto w-full max-w-md"
+              />
+            </div>
             <div className="mt-2 flex items-end justify-between">
               <div>
                 <p className="text-2xl font-black">{hero.device.model}</p>

@@ -31,13 +31,15 @@ export default function PhoneDetail() {
       {/* 단말기 */}
       <div className="mt-6 grid gap-4 rounded-3xl bg-white p-6 shadow-card md:grid-cols-[1fr_1.1fr] md:p-8">
         <div>
-          <Image
-            src={siteConfig.pricingPhone.deviceImage}
-            alt="IP-520GA 인터넷전화 단말기"
-            width={1000}
-            height={760}
-            className="h-auto w-full rounded-2xl bg-surface"
-          />
+          <div className="overflow-hidden rounded-2xl" style={{ backgroundColor: siteConfig.pricingPhone.deviceImageBg }}>
+            <Image
+              src={siteConfig.pricingPhone.deviceImage}
+              alt="IP-520GA 인터넷전화 단말기"
+              width={siteConfig.pricingPhone.deviceImageSize.width}
+              height={siteConfig.pricingPhone.deviceImageSize.height}
+              className="h-auto w-full"
+            />
+          </div>
         </div>
         <div>
           <p className="text-sm font-bold text-brand">{d.device.title}</p>
