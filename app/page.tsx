@@ -15,8 +15,13 @@ import Reviews from "@/components/sections/Reviews";
 import Faq from "@/components/sections/Faq";
 import Consult from "@/components/sections/Consult";
 import { siteConfig } from "@/site.config";
+import { getVisibleBanners } from "@/lib/banners-server";
 
-export default function HomePage() {
+/** 배너 설정 반영을 위해 60초마다 재생성 */
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const banners = await getVisibleBanners();
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -31,11 +36,11 @@ export default function HomePage() {
 
   return (
     <>
-      <Header />
+      <Header banners={banners} />
       <div className="mx-auto max-w-7xl md:grid md:grid-cols-[176px_minmax(0,1fr)] md:gap-6 md:px-6 lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-10 lg:px-8">
         {/* 좌측 고정 메뉴 (데스크톱) */}
         <aside className="hidden md:block">
-          <SideNav />
+          <SideNav banners={banners} />
         </aside>
 
         {/* 메뉴 순서: 특장점 → 가입혜택 → 구성도 → 요금안내 → 개통절차 → 고객후기 → FAQ → 상담신청 */}
