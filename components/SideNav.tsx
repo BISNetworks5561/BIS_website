@@ -57,21 +57,28 @@ export default function SideNav() {
 
       <div className="my-5 border-t border-line" />
 
-      {/* 배너 바로가기: BIS오프닝 APP & 공식 블로그 */}
+      {/* 배너 바로가기: BIS오프닝 APP (준비중) & 공식 블로그 */}
       <div className="space-y-3">
         <a
-          href={siteConfig.links.openingApp}
+          href={siteConfig.links.openingSignup}
           target="_blank"
           rel="noopener noreferrer"
-          className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+          className="group relative block overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
         >
-          <Image
-            src="/banner-app.png"
-            alt="BIS오프닝 APP 다운/접속하기"
-            width={170}
-            height={253}
-            className="h-auto w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
-          />
+          <div className="relative">
+            <Image
+              src="/banner-app.png"
+              alt="BIS오프닝 APP 다운/접속하기 (준비중)"
+              width={170}
+              height={253}
+              className="h-auto w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+            />
+            {/* 준비중 뱃지 */}
+            <div className="absolute top-2.5 right-2.5 flex items-center gap-1 rounded-full bg-slate-900/85 px-2.5 py-1 text-[11px] font-black text-amber-300 shadow-md backdrop-blur-xs">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+              <span>준비중</span>
+            </div>
+          </div>
         </a>
         <a
           href={siteConfig.links.blog}

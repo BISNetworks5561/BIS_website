@@ -83,22 +83,28 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* 배너 바로가기: BIS오프닝 APP & 공식 블로그 */}
+          {/* 배너 바로가기: BIS오프닝 APP (준비중) & 공식 블로그 */}
           <div className="mt-6 grid grid-cols-2 gap-3">
             <a
-              href={siteConfig.links.openingApp}
+              href={siteConfig.links.openingSignup}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:opacity-95"
+              className="group relative block overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:opacity-95"
             >
-              <Image
-                src="/banner-app.png"
-                alt="BIS오프닝 APP 다운/접속하기"
-                width={170}
-                height={253}
-                className="h-auto w-full object-cover"
-              />
+              <div className="relative">
+                <Image
+                  src="/banner-app.png"
+                  alt="BIS오프닝 APP 다운/접속하기 (준비중)"
+                  width={170}
+                  height={253}
+                  className="h-auto w-full object-cover"
+                />
+                <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-slate-900/85 px-2 py-0.5 text-[10px] font-black text-amber-300 shadow-md">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  <span>준비중</span>
+                </div>
+              </div>
             </a>
             <a
               href={siteConfig.links.blog}

@@ -65,8 +65,10 @@ export const siteConfig = {
 
   /** 외부 서비스 바로가기 */
   links: {
-    /** 비즈오프닝(BIS_Opening) 앱 — /opening 으로 접속하면 이 주소로 이동 */
+    /** 비즈오프닝(BIS_Opening) 앱 메인 */
     openingApp: "https://app.bisnetworks.co.kr",
+    /** 비즈오프닝 신규 회원 접속/가입 페이지 */
+    openingSignup: "https://app.bisnetworks.co.kr/signup",
     blog: "https://blog.naver.com/bisnetworks",
   },
 

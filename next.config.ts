@@ -6,9 +6,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   async redirects() {
     return [
-      // 비즈오프닝 앱 바로가기: bisnetworks.co.kr/opening → app.bisnetworks.co.kr
-      { source: "/opening", destination: siteConfig.links.openingApp, permanent: false },
-      { source: "/app", destination: siteConfig.links.openingApp, permanent: false },
+      // 비즈오프닝 앱 바로가기: bisnetworks.co.kr/opening → app.bisnetworks.co.kr/signup (신규회원 가입/접속)
+      { source: "/opening", destination: siteConfig.links.openingSignup, permanent: false },
+      { source: "/app", destination: siteConfig.links.openingSignup, permanent: false },
     ];
   },
 };
