@@ -42,6 +42,7 @@ export default function SohoPricing() {
             )}
             <p className="text-3xl font-black">{p.speed}</p>
             <p className="mt-1 text-sm text-muted">{p.desc}</p>
+            {"sub" in p && p.sub && <p className="mt-0.5 text-xs font-bold text-brand">{p.sub}</p>}
             <p className="mt-5">
               <span className={cn("font-black text-brand-dark", p.price == null ? "text-xl" : "text-3xl")}>{krw(p.price)}</span>
               {p.price != null && <span className="text-sm text-muted"> /월</span>}

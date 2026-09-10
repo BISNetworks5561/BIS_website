@@ -151,7 +151,6 @@ export const siteConfig = {
   /**
    * 소호인터넷 요금 — 상품 2종(소호와이파이 / 소호결제안심), 속도 4단계
    * 단위: 원 / 월, 부가세 별도, 3년 약정 기준. price 가 null 이면 "상담 문의"로 표시.
-   * TODO 소호결제안심 요금은 확정 후 입력
    */
   pricingSoho: {
     vatNote: "부가세 별도 · 3년 약정 기준 · 지역 및 건물 환경에 따라 달라질 수 있습니다.",
@@ -170,12 +169,12 @@ export const siteConfig = {
       {
         key: "pay",
         label: "소호결제안심",
-        desc: "인터넷 장애 시에도 카드 결제가 끊기지 않도록 백업 회선을 함께 구성하는 상품. 상세 조건은 상담 시 안내.",
+        desc: "인터넷 장애 시에도 LTE 라우터로 카드 결제가 끊기지 않는 상품. 소호와이파이 구성에 LTE 백업 회선이 추가됩니다.",
         plans: [
-          { speed: "100M", price: null, popular: false, badge: "", desc: "소규모 매장 · 1~3인 사무실", fit: ["결제 단말 백업 회선", "POS·카드단말", "CCTV 1~2대"] },
-          { speed: "200M", price: null, popular: false, badge: "", desc: "소형 매장 또는 사무실", fit: ["결제 단말 백업 회선", "손님 Wi-Fi 소규모", "IPTV 1대"] },
-          { speed: "500M", price: null, popular: true, badge: "추천", desc: "중소형 매장 또는 사무실", fit: ["결제 단말 백업 회선", "손님 Wi-Fi 동시 접속", "CCTV 다수"] },
-          { speed: "1G", price: null, popular: false, badge: "", desc: "스튜디오 · 대용량 업로드", fit: ["결제 단말 백업 회선", "대용량 파일 송수신", "화상회의"] },
+          { speed: "100M", price: 23000, popular: false, badge: "", desc: "소규모 매장 · 1~3인 사무실", sub: "LTE 라우터 제공", fit: ["POS·카드단말", "CCTV 1~2대", "기본 웹·메신저"] },
+          { speed: "200M", price: 26000, popular: false, badge: "", desc: "소형 매장 또는 사무실", sub: "LTE 라우터 제공", fit: ["손님 Wi-Fi 소규모", "IPTV 1대", "클라우드 POS"] },
+          { speed: "500M", price: 33000, popular: true, badge: "가성비 1위", desc: "중소형 매장 또는 사무실", sub: "LTE 라우터 제공", fit: ["손님 Wi-Fi 동시 접속", "IPTV·음악 스트리밍", "CCTV 다수"] },
+          { speed: "1G", price: 38000, popular: false, badge: "BEST", desc: "스튜디오 · 대용량 업로드", sub: "LTE 라우터 제공", fit: ["대용량 파일 송수신", "다수 CCTV 원격 관제", "화상회의"] },
         ],
       },
     ],
