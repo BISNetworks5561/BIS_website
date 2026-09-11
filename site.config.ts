@@ -245,6 +245,10 @@ export const siteConfig = {
   pricingCctv: {
     vatNote: "부가세 포함 · 카메라 1대당 월 요금 · LG U+ 공시 기준 · 프로모션에 따라 달라질 수 있습니다.",
     maxCameras: 16,
+    /** 카메라 제품 사진 (public/cctv/) */
+    cameraImage: "/cctv/dome.png",
+    cameraImageBg: "#ffffff",
+    cameraImageSize: { width: 164, height: 140 },
     /** 약정별 월 요금 */
     terms: [
       { term: "무약정", months: 0, price: 55000, popular: false, badge: "" },
@@ -255,8 +259,8 @@ export const siteConfig = {
       { term: "5년 약정", months: 60, price: 11000, popular: false, badge: "최저" },
     ],
     install: [
-      { label: "실내 설치비", value: "94,600원", promo: "3~5년 약정 시 14,300원" },
-      { label: "실외 설치비", value: "126,500원", promo: "3~5년 약정 시 프로모션 적용" },
+      { label: "실내 설치비", value: "지원", promo: "BIS네트웍스 가입 시 지원" },
+      { label: "실외 설치비", value: "지원", promo: "BIS네트웍스 가입 시 지원" },
     ],
     /** 부가서비스 (월) */
     addons: [

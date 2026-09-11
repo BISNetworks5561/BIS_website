@@ -1,12 +1,34 @@
+import Image from "next/image";
 import Section from "@/components/ui/Section";
 import Icon from "@/components/ui/Icon";
 import { cctvDetail as d } from "@/lib/content-cctv";
+import { siteConfig } from "@/site.config";
 import { cn } from "@/lib/utils";
 
 /** 상품 상세: 카메라 6종 → 공통 사양 → AI 감지 → 앱/PC */
 export default function CctvDetail() {
   return (
     <Section id="detail" tone="surface" eyebrow={d.subtitle} title={d.title} desc={d.desc}>
+      {/* 대표 제품 사진 */}
+      <div className="mb-6 flex flex-col items-center gap-5 rounded-3xl bg-white p-6 shadow-card md:flex-row md:p-8">
+        <div className="overflow-hidden rounded-2xl border border-line" style={{ backgroundColor: siteConfig.pricingCctv.cameraImageBg }}>
+          <Image
+            src={siteConfig.pricingCctv.cameraImage}
+            alt="LG U+ 지능형 CCTV 실내 돔형 카메라"
+            width={siteConfig.pricingCctv.cameraImageSize.width}
+            height={siteConfig.pricingCctv.cameraImageSize.height}
+            className="h-36 w-auto md:h-40"
+          />
+        </div>
+        <div>
+          <p className="text-sm font-bold text-brand">U+지능형CCTV 카메라</p>
+          <p className="mt-1 text-xl font-black">Full HD 2MP · 야간 적외선 · 클라우드 저장</p>
+          <p className="mt-2 text-sm text-muted">
+            실내 돔형(D-1200D)을 기본으로, 공간과 목적에 따라 아래 6종 중에서 고릅니다. 모든 카메라는 U+ 클라우드에 영상을 저장하고 AI 침입·훼손 감지를 기본 제공합니다.
+          </p>
+        </div>
+      </div>
+
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {d.cameras.map((c) => (
           <li key={c.model} className={cn("relative rounded-3xl bg-white p-6 shadow-card", c.badge === "인기" && "border-2 border-uplus")}>

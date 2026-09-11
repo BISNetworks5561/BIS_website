@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import UplusBadge from "@/components/ui/UplusBadge";
@@ -46,8 +47,23 @@ export default function CctvHero() {
 
         <div className="animate-fade-up [animation-delay:120ms]">
           <div className="rounded-3xl border border-line bg-white p-6 shadow-card md:p-8">
-            <UplusBadge>U+지능형CCTV</UplusBadge>
-            <p className="mt-1 text-2xl font-black">{hero.card.title}</p>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <UplusBadge>U+지능형CCTV</UplusBadge>
+                <p className="mt-1 text-2xl font-black">{hero.card.title}</p>
+                <p className="mt-1 text-xs text-muted">실내 돔형 카메라 D-1200D</p>
+              </div>
+              <div className="shrink-0 overflow-hidden rounded-2xl border border-line" style={{ backgroundColor: siteConfig.pricingCctv.cameraImageBg }}>
+                <Image
+                  src={siteConfig.pricingCctv.cameraImage}
+                  alt="LG U+ 지능형 CCTV 실내 돔형 카메라"
+                  width={siteConfig.pricingCctv.cameraImageSize.width}
+                  height={siteConfig.pricingCctv.cameraImageSize.height}
+                  priority
+                  className="h-24 w-auto md:h-28"
+                />
+              </div>
+            </div>
             <dl className="mt-6 grid grid-cols-2 gap-4">
               {hero.card.stats.map((d) => (
                 <div key={d.k} className="rounded-2xl bg-surface p-4">
