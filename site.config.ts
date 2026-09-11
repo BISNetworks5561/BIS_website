@@ -259,8 +259,8 @@ export const siteConfig = {
       { term: "5년 약정", months: 60, price: 11000, popular: false, badge: "최저" },
     ],
     install: [
-      { label: "실내 설치비", value: "지원", promo: "BIS네트웍스 가입 시 지원" },
-      { label: "실외 설치비", value: "지원", promo: "BIS네트웍스 가입 시 지원" },
+      { label: "실내 설치비", value: "3년 약정 시 지원", promo: "공시 금액 94,600원" },
+      { label: "실외 설치비", value: "3년 약정 시 지원", promo: "공시 금액 126,500원" },
     ],
     /** 부가서비스 (월) */
     addons: [
