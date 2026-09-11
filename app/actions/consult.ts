@@ -5,7 +5,8 @@ import { getServiceClient } from "@/lib/supabase/server";
 
 import type { ConsultState } from "@/lib/consult";
 
-const PLAN_TYPES = new Set(["standalone", "bundle", "unknown"]);
+const PLAN_TYPES = new Set(["officenet", "soho", "phone", "cctv", "standalone", "bundle", "unknown"]);
+const PRODUCT_LABEL: Record<string, string> = { officenet: "오피스넷", soho: "소호인터넷", phone: "인터넷전화", cctv: "CCTV" };
 const IP_TYPES = new Set(["dynamic", "static", "unknown"]);
 
 function str(fd: FormData, key: string, max = 200) {
@@ -58,13 +59,14 @@ export async function submitConsult(
   const forwarded = h.get("x-forwarded-for");
   const ip = forwarded ? forwarded.split(",")[0].trim() : null;
 
-  const { error } = await supabase.from("consult_requests").insert({
+  const planType = PLAN_TYPES.has(planTypeRaw) ? planTypeRaw : "unknown";
+  const row = {
     name,
     company: company || null,
     phone: formatPhone(phone),
     email: email || null,
     region: region || null,
-    plan_type: PLAN_TYPES.has(planTypeRaw) ? planTypeRaw : "unknown",
+    plan_type: planType,
     speed: speed || null,
     ip_type: IP_TYPES.has(ipTypeRaw) ? ipTypeRaw : "unknown",
     message: message || null,
@@ -72,7 +74,20 @@ export async function submitConsult(
     source: h.get("referer"),
     user_agent: h.get("user-agent")?.slice(0, 500) ?? null,
     ip,
-  });
+  };
+
+  let { error } = await supabase.from("consult_requests").insert(row);
+
+  // DB 제약조건이 아직 예전 값(standalone/bundle/unknown)만 허용하는 경우:
+  // 접수를 잃지 않도록 관심상품을 메시지 앞에 적고 unknown 으로 저장
+  if (error && error.code === "23514" && PRODUCT_LABEL[planType]) {
+    const retry = await supabase.from("consult_requests").insert({
+      ...row,
+      plan_type: "unknown",
+      message: `[관심상품: ${PRODUCT_LABEL[planType]}] ${row.message ?? ""}`.trim(),
+    });
+    error = retry.error;
+  }
 
   if (error) {
     console.error("[consult] insert failed:", error.message);

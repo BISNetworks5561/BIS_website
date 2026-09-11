@@ -41,7 +41,7 @@ export default async function SohoPage() {
           <SohoDetail />
           <SohoPricing />
           <Process content={sohoProcess} />
-          <Consult />
+          <Consult product="soho" />
         </main>
       </div>
       <Footer />

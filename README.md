@@ -38,6 +38,8 @@ npm run dev
 폼 제출은 서버 액션([`app/actions/consult.ts`](./app/actions/consult.ts))에서 비밀 키로만 INSERT 합니다.
 접수 내역은 Supabase 대시보드 **Table Editor → consult_requests** 에서 확인하세요.
 
+관심상품 값(오피스넷/소호인터넷/인터넷전화/CCTV)을 저장하려면 [`supabase/migrations/20260911000000_consult_plan_type.sql`](./supabase/migrations/20260911000000_consult_plan_type.sql) 도 한 번 실행하세요. 실행 전에는 `unknown` 으로 저장되고 관심상품이 문의 내용 앞에 `[관심상품: …]` 로 기록됩니다.
+
 ## 4. Vercel 배포
 
 1. Vercel(BISNetworks 계정) → **Add New Project** → GitHub `BISNetworks5561/BIS_website` import

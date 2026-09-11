@@ -41,7 +41,7 @@ export default async function PhonePage() {
           <PhoneDetail />
           <PhonePricing />
           <Process content={phoneProcess} />
-          <Consult />
+          <Consult product="phone" />
         </main>
       </div>
       <Footer />

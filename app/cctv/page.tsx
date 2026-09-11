@@ -41,7 +41,7 @@ export default async function CctvPage() {
           <CctvDiagram />
           <CctvPricing />
           <Process content={cctvProcess} />
-          <Consult />
+          <Consult product="cctv" />
         </main>
       </div>
       <Footer />

@@ -12,7 +12,7 @@ type Row = {
   phone: string;
   email: string | null;
   region: string | null;
-  plan_type: "standalone" | "bundle" | "unknown";
+  plan_type: "officenet" | "soho" | "phone" | "cctv" | "standalone" | "bundle" | "unknown";
   speed: string | null;
   ip_type: "dynamic" | "static" | "unknown";
   message: string | null;
@@ -25,7 +25,7 @@ const STATUS: Record<Row["status"], { label: string; cls: string }> = {
   contacted: { label: "연락함", cls: "bg-brand-light text-brand-dark" },
   closed: { label: "완료", cls: "bg-surface text-muted" },
 };
-const PLAN: Record<Row["plan_type"], string> = { standalone: "단독", bundle: "결합", unknown: "-" };
+const PLAN: Record<Row["plan_type"], string> = { officenet: "오피스넷", soho: "소호인터넷", phone: "인터넷전화", cctv: "CCTV", standalone: "단독", bundle: "결합", unknown: "-" };
 const IP: Record<Row["ip_type"], string> = { dynamic: "유동", static: "고정", unknown: "-" };
 
 export default function ConsultsClient() {

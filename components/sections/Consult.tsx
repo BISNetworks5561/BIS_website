@@ -3,8 +3,9 @@ import Icon from "@/components/ui/Icon";
 import ConsultForm from "@/components/ConsultForm";
 import { consult } from "@/lib/content";
 import { siteConfig, telHref } from "@/site.config";
+import type { ProductValue } from "@/lib/consult";
 
-export default function Consult() {
+export default function Consult({ product = "officenet" }: { product?: ProductValue }) {
   return (
     <Section id="consult" eyebrow={consult.subtitle} title={consult.title} desc={consult.desc}>
       <div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr]">
@@ -43,7 +44,7 @@ export default function Consult() {
         </aside>
 
         <div className="rounded-3xl border border-line p-6 shadow-card md:p-8">
-          <ConsultForm />
+          <ConsultForm defaultProduct={product} />
         </div>
       </div>
     </Section>

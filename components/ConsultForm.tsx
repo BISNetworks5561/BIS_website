@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from "react";
 import { submitConsult } from "@/app/actions/consult";
-import { initialConsultState } from "@/lib/consult";
+import { initialConsultState, PRODUCT_OPTIONS, type ProductValue } from "@/lib/consult";
 import { consult } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +23,7 @@ function Field({ name, error, children }: { name: string; error?: string; childr
   );
 }
 
-export default function ConsultForm() {
+export default function ConsultForm({ defaultProduct = "officenet" }: { defaultProduct?: ProductValue }) {
   const [state, action, pending] = useActionState(submitConsult, initialConsultState);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -97,10 +97,12 @@ export default function ConsultForm() {
           <label htmlFor="plan_type" className={label}>
             관심 상품
           </label>
-          <select id="plan_type" name="plan_type" className={input} defaultValue="unknown">
-            <option value="unknown">선택 안 함</option>
-            <option value="standalone">오피스넷 단독</option>
-            <option value="bundle">결합 (인터넷전화·Wi-Fi·CCTV)</option>
+          <select id="plan_type" name="plan_type" className={input} defaultValue={defaultProduct}>
+            {PRODUCT_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
           </select>
         </Field>
         <Field name="speed">
