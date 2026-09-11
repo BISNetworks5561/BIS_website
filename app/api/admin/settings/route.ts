@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/admin/auth";
-import { getServiceClient } from "@/lib/supabase/server";
+import { getServiceClient, withKeyHint } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 
@@ -21,7 +21,7 @@ export async function GET(req: Request) {
   const { data, error } = await supabase.from("admin_settings").select("value").eq("key", key.data).maybeSingle();
   if (error) {
     // 테이블 미생성 등 → 클라이언트가 로컬 저장으로 전환
-    return NextResponse.json({ error: error.message, fallback: true }, { status: 503 });
+    return NextResponse.json({ error: withKeyHint(error.message, error.code), fallback: true }, { status: 503 });
   }
   return NextResponse.json({ value: data?.value ?? null });
 }
@@ -45,6 +45,6 @@ export async function PUT(req: Request) {
   const { error } = await supabase
     .from("admin_settings")
     .upsert({ key: body.key, value: body.value as object, updated_at: new Date().toISOString() });
-  if (error) return NextResponse.json({ error: error.message, fallback: true }, { status: 503 });
+  if (error) return NextResponse.json({ error: withKeyHint(error.message, error.code), fallback: true }, { status: 503 });
   return NextResponse.json({ ok: true });
 }

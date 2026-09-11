@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/admin/auth";
-import { getServiceClient } from "@/lib/supabase/server";
+import { getServiceClient, withKeyHint } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 
@@ -28,7 +28,7 @@ export async function GET(req: Request) {
     .select("id, created_at, name, company, phone, email, region, plan_type, speed, ip_type, message, status, memo")
     .order("created_at", { ascending: false })
     .limit(200);
-  if (error) return NextResponse.json({ error: error.message }, { status: 502 });
+  if (error) return NextResponse.json({ error: withKeyHint(error.message, error.code) }, { status: 502 });
   return NextResponse.json({ rows: data ?? [] });
 }
 

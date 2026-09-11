@@ -25,3 +25,26 @@ export function getServiceClient(): SupabaseClient | null {
   });
   return cached;
 }
+
+/** 설정된 서버 키가 어떤 종류인지 (값은 노출하지 않음) — 권한 오류 진단용 */
+export function describeSecretKey(): string {
+  const k = process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
+  if (!k) return "SUPABASE_SECRET_KEY 가 설정되지 않았습니다.";
+  if (k.startsWith("sb_secret_")) return "SUPABASE_SECRET_KEY 는 sb_secret_ 형식(정상)입니다.";
+  if (k.startsWith("sb_publishable_")) return "SUPABASE_SECRET_KEY 에 공개 키(sb_publishable_)가 들어 있습니다. Supabase → Project Settings → API Keys → Secret keys 의 sb_secret_ 키로 교체하세요.";
+  if (k.startsWith("eyJ")) {
+    try {
+      const payload = JSON.parse(Buffer.from(k.split(".")[1], "base64url").toString("utf8")) as { role?: string };
+      if (payload.role === "service_role") return "SUPABASE_SECRET_KEY 는 구형 service_role 키(정상)입니다.";
+      return `SUPABASE_SECRET_KEY 에 구형 ${payload.role ?? "알 수 없는"} 키가 들어 있습니다. service_role 또는 sb_secret_ 키로 교체하세요.`;
+    } catch {
+      return "SUPABASE_SECRET_KEY 형식을 해석할 수 없습니다.";
+    }
+  }
+  return "SUPABASE_SECRET_KEY 형식이 올바르지 않습니다. sb_secret_ 로 시작하는 키를 넣으세요.";
+}
+
+/** Postgres 권한 오류(42501)이면 키 진단 문구를 덧붙임 */
+export function withKeyHint(message: string, code?: string): string {
+  return code === "42501" ? `${message} — ${describeSecretKey()} 값 변경 후 Vercel 에서 Redeploy 해야 적용됩니다.` : message;
+}
