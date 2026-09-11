@@ -238,6 +238,45 @@ export const siteConfig = {
     ],
   },
 
+  /**
+   * 지능형 CCTV 요금 — LG U+ 공시 기준(부가세 포함), 카메라 1대당 월 요금. 프로모션에 따라 변동 가능.
+   * 참고: lguplus.com/biz U+지능형CCTV(B000000007)
+   */
+  pricingCctv: {
+    vatNote: "부가세 포함 · 카메라 1대당 월 요금 · LG U+ 공시 기준 · 프로모션에 따라 달라질 수 있습니다.",
+    maxCameras: 16,
+    /** 약정별 월 요금 */
+    terms: [
+      { term: "무약정", months: 0, price: 55000, popular: false, badge: "" },
+      { term: "1년 약정", months: 12, price: 39600, popular: false, badge: "" },
+      { term: "2년 약정", months: 24, price: 26400, popular: false, badge: "" },
+      { term: "3년 약정", months: 36, price: 13200, popular: true, badge: "가장 많이 선택" },
+      { term: "4년 약정", months: 48, price: 12100, popular: false, badge: "" },
+      { term: "5년 약정", months: 60, price: 11000, popular: false, badge: "최저" },
+    ],
+    install: [
+      { label: "실내 설치비", value: "94,600원", promo: "3~5년 약정 시 14,300원" },
+      { label: "실외 설치비", value: "126,500원", promo: "3~5년 약정 시 프로모션 적용" },
+    ],
+    /** 부가서비스 (월) */
+    addons: [
+      { name: "가변초점 · PTZ 카메라", price: "2,200원 / 대", note: "광학 줌 · 360° 회전" },
+      { name: "배회 · 유기 · 연기/불꽃 감지", price: "2,200원 / 대", note: "선택 AI 분석" },
+      { name: "저장기간 +30일", price: "1,650원 / 대", note: "기본 15일 + 30일" },
+      { name: "저장기간 +60일", price: "4,400원 / 대", note: "기본 15일 + 60일" },
+      { name: "저장기간 +90일", price: "6,600원 / 대", note: "기본 15일 + 90일" },
+      { name: "공유 아이디 5개 추가", price: "3,300원", note: "기본 5개 + 5개, 이후 5개당 1,650원" },
+    ],
+    /** 안심서비스 · 에스원 */
+    safety: [
+      { name: "안심서비스 기본형", price: "2,200원", note: "상해 1억 · 도난 500만" },
+      { name: "안심서비스 보급형", price: "5,500원", note: "상해 1억 · 도난 1천만 · 화재 1천만" },
+      { name: "안심서비스 고급형", price: "16,500원", note: "상해 1억 · 도난 3천만 · 화재 1천만" },
+      { name: "에스원 프리미엄", price: "46,000원", note: "무제한 출동 · 침입탐지센서 3종" },
+    ],
+    s1: { freeDispatch: "월 2회 무료", extraDispatch: "추가 건당 33,000원" },
+  },
+
   /** 신뢰 지표 (TODO 실제 수치로 교체) */
   stats: [
     { value: 18800, suffix: "+", label: "누적 기업 고객" },
