@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useAdminKey } from "@/components/admin/admin-key-context";
 import ThumbnailMaker from "@/components/studio/ThumbnailMaker";
 import ClayImageMaker from "@/components/studio/ClayImageMaker";
+import AffiliateLinks from "@/components/studio/AffiliateLinks";
+import { DEFAULT_AFFILIATE, type AffiliateOptions } from "@/lib/studio/affiliate";
 import type { BlogPost, StudioRequest } from "@/lib/studio/schema";
 import { postToHtml, postToText } from "@/lib/studio/render";
 import { productToCategory } from "@/lib/studio/backgrounds";
@@ -41,6 +43,8 @@ export default function StudioClient() {
   const [thumb, setThumb] = useState({ title: "", subtitle: "", badge: "LG U+ 오피스넷" });
   /** AI 이미지 탭에서 배경으로 넘긴 항목 id → 대표이미지 탭에서 자동 선택 */
   const [preferredBgId, setPreferredBgId] = useState<string | undefined>(undefined);
+  /** 쿠팡파트너스 링크 삽입 옵션 (본문 복사 시 반영) */
+  const [affiliate, setAffiliate] = useState<AffiliateOptions>(DEFAULT_AFFILIATE);
   const [toast, setToast] = useState("");
   const [providers, setProviders] = useState<Record<ProviderKey, ProviderInfo> | null>(null);
   const [provider, setProvider] = useState<ProviderKey>("gemini");
@@ -106,8 +110,8 @@ export default function StudioClient() {
     }
   };
 
-  const html = useMemo(() => (post ? postToHtml(post) : ""), [post]);
-  const text = useMemo(() => (post ? postToText(post) : ""), [post]);
+  const html = useMemo(() => (post ? postToHtml(post, affiliate) : ""), [post, affiliate]);
+  const text = useMemo(() => (post ? postToText(post, affiliate) : ""), [post, affiliate]);
 
   const copy = async (kind: "html" | "text" | "title" | "tags") => {
     if (!post) return;
@@ -249,6 +253,12 @@ export default function StudioClient() {
               className={input}
             />
           </Field>
+          <AffiliateLinks value={affiliate} onChange={setAffiliate} />
+          {affiliate.enabled && affiliate.links.length > 0 && post && (
+            <p className="text-[11px] text-muted">
+              본문 복사 시 쿠팡파트너스 링크 {affiliate.links.length}개와 고지 문구가 함께 들어갑니다. 미리보기(본문 탭)에도 반영됩니다.
+            </p>
+          )}
           <button
             type="button"
             onClick={generate}
@@ -344,7 +354,7 @@ export default function StudioClient() {
                 </p>
               </div>
               <div
-                className="space-y-3 text-[15px] leading-relaxed [&_h3]:mt-6 [&_h3]:text-lg [&_h3]:font-black [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mt-1"
+                className="space-y-3 text-[15px] leading-relaxed [&_h3]:mt-6 [&_h3]:text-lg [&_h3]:font-black [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mt-1 [&_a]:font-bold [&_a]:text-brand [&_a]:underline [&_em]:text-xs [&_em]:text-muted"
                 dangerouslySetInnerHTML={{ __html: html }}
               />
             </article>
