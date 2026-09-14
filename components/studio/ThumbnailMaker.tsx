@@ -22,11 +22,13 @@ type Props = {
   subtitle: string;
   badge: string;
   category: BgCategory;
+  /** 라이브러리 로드 후 우선 선택할 배경 id (AI 이미지 탭에서 넘어온 항목) */
+  preferredId?: string;
   onChange: (v: { title?: string; subtitle?: string; badge?: string }) => void;
 };
 
 /** 대표이미지: 배경(라이브러리) + 문구 오버레이 → PNG */
-export default function ThumbnailMaker({ title, subtitle, badge, category, onChange }: Props) {
+export default function ThumbnailMaker({ title, subtitle, badge, category, preferredId, onChange }: Props) {
   const key = useAdminKey();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -89,6 +91,15 @@ export default function ThumbnailMaker({ title, subtitle, badge, category, onCha
   useEffect(() => {
     manualRef.current = false;
   }, [category]);
+  // AI 이미지 탭에서 넘어온 배경이 있으면 그것을 우선 선택 (자동 선택보다 먼저 실행)
+  useEffect(() => {
+    if (mode === "loading" || !preferredId) return;
+    const found = [...library.items, ...BUILTIN_BACKGROUNDS].find((b) => b.id === preferredId);
+    if (!found) return;
+    manualRef.current = true;
+    setBg(found);
+    setDarkText(found.light);
+  }, [preferredId, library, mode]);
   useEffect(() => {
     if (mode === "loading" || manualRef.current) return;
     const auto = pickBackground(library, category);

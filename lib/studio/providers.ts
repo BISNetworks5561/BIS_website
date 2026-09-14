@@ -169,7 +169,7 @@ async function withClaude(input: StudioRequest, model: string): Promise<Generate
 
 /** 계정에서 사용 가능한 Gemini 모델 목록 (10분 캐시) */
 let geminiModelCache: { at: number; names: string[] } | null = null;
-async function listGeminiModels(key: string): Promise<string[]> {
+export async function listGeminiModels(key: string): Promise<string[]> {
   if (geminiModelCache && Date.now() - geminiModelCache.at < 10 * 60_000) return geminiModelCache.names;
   const names: string[] = [];
   let pageToken = "";

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useAdminKey } from "@/components/admin/admin-key-context";
 import ThumbnailMaker from "@/components/studio/ThumbnailMaker";
+import ClayImageMaker from "@/components/studio/ClayImageMaker";
 import type { BlogPost, StudioRequest } from "@/lib/studio/schema";
 import { postToHtml, postToText } from "@/lib/studio/render";
 import { productToCategory } from "@/lib/studio/backgrounds";
@@ -36,8 +37,10 @@ export default function StudioClient() {
   const [error, setError] = useState("");
   const [post, setPost] = useState<BlogPost | null>(null);
   const [usage, setUsage] = useState<{ input: number; output: number; model: string } | null>(null);
-  const [tab, setTab] = useState<"post" | "thumb">("post");
+  const [tab, setTab] = useState<"post" | "thumb" | "image">("post");
   const [thumb, setThumb] = useState({ title: "", subtitle: "", badge: "LG U+ 오피스넷" });
+  /** AI 이미지 탭에서 배경으로 넘긴 항목 id → 대표이미지 탭에서 자동 선택 */
+  const [preferredBgId, setPreferredBgId] = useState<string | undefined>(undefined);
   const [toast, setToast] = useState("");
   const [providers, setProviders] = useState<Record<ProviderKey, ProviderInfo> | null>(null);
   const [provider, setProvider] = useState<ProviderKey>("gemini");
@@ -141,7 +144,7 @@ export default function StudioClient() {
     <div className="p-5 md:p-8">
       <div className="mb-6">
         <h1 className="text-2xl font-black">콘텐츠 스튜디오</h1>
-        <p className="mt-1 text-sm text-muted">주제와 키워드를 넣으면 네이버 블로그용 글을 작성하고, 고정 배경 위에 문구만 바꿔 대표이미지를 만듭니다.</p>
+        <p className="mt-1 text-sm text-muted">주제와 키워드를 넣으면 네이버 블로그용 글을 작성하고, 글 내용에 맞는 클레이아트 이미지를 만들어 그 위에 문구를 얹은 대표이미지까지 완성합니다.</p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[380px_minmax(0,1fr)]">
@@ -266,14 +269,14 @@ export default function StudioClient() {
         <section className="min-w-0 rounded-3xl border border-line bg-white p-5 shadow-card">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
             <div className="flex rounded-full bg-surface p-1">
-              {(["post", "thumb"] as const).map((t) => (
+              {(["post", "image", "thumb"] as const).map((t) => (
                 <button
                   key={t}
                   type="button"
                   onClick={() => setTab(t)}
                   className={cn("rounded-full px-4 py-1.5 text-sm font-bold", tab === t ? "bg-white text-brand shadow-card" : "text-muted")}
                 >
-                  {t === "post" ? "본문" : "대표이미지"}
+                  {t === "post" ? "본문" : t === "image" ? "AI 이미지" : "대표이미지"}
                 </button>
               ))}
             </div>
@@ -297,9 +300,24 @@ export default function StudioClient() {
               subtitle={thumb.subtitle}
               badge={thumb.badge}
               category={productToCategory(req.product)}
+              preferredId={preferredBgId}
               onChange={(v) => setThumb((t) => ({ ...t, ...v }))}
             />
           )}
+
+          {/* 탭을 오가도 생성한 이미지가 남도록 숨김 처리만 */}
+          <div hidden={tab !== "image"}>
+            <ClayImageMaker
+              post={post}
+              topic={req.topic}
+              product={req.product}
+              geminiReady={providers ? providers.gemini.ready : null}
+              onUseAsBackground={(id) => {
+                setPreferredBgId(id);
+                setTab("thumb");
+              }}
+            />
+          </div>
 
           {tab === "post" && !post && (
             <div className="flex min-h-[320px] items-center justify-center text-center text-sm text-muted">
